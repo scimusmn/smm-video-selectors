@@ -1,0 +1,133 @@
+html,
+body {
+  font-family: open-sans, sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+}
+
+@property --percentage {
+  inherits: false;
+  initial-value: 0%;
+  syntax: "<percentage>";
+}
+
+@keyframes timer {
+  to {
+    --percentage: 100%;
+  }
+}
+
+/* *****EXAMPLE STYLES**** */
+
+.example .list-button {
+  background-color: transparent;
+  border: none;
+  height: 200px;
+  margin: 20px;
+  outline: none;
+  width: 200px;
+}
+
+.example button img {
+  height: 200px;
+  width: 200px;
+}
+
+.example .component-container {
+  background-color: gray;
+  color: white;
+}
+
+.example .list-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.example .title-container {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  padding: 200px;
+  position: relative;
+}
+
+.example .title1 {
+  font-size: 50px;
+}
+
+.example .title2 {
+  color: gold;
+  font-size: 50px;
+}
+
+.example .video-name1 {
+  color: white;
+  font-size: 20px;
+}
+
+.example .video-name2 {
+  color: gold;
+  font-size: 20px;
+}
+
+.example .center {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.example .transport-container {
+  background-color: transparent;
+  bottom: 50px;
+  left: 50px;
+  position: absolute;
+}
+
+.example .captions {
+  bottom: 170px;
+  font-size: 35px;
+  font-weight: 900;
+  padding-left: 100px;
+  padding-right: 100px;
+  position: absolute;
+  text-align: center;
+}
+
+.example .captions2 {
+  bottom: 100px;
+  color: gold;
+}
+
+.example .captions-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.example .graphic {
+  height: 1080px;
+  opacity: 0.2;
+  position: absolute;
+  top: 0;
+  width: 1920px;
+}
+
+.example hr {
+  display: none;
+}
+
+.example .progress {
+  background: white;
+  bottom: 0;
+  height: 20px;
+  position: absolute;
+  width: var(--percentage);
+}
+
+.example .icon {
+  background: url("back.svg") no-repeat;
+  color: white;
+  height: 100px;
+  width: 100px;
+}
