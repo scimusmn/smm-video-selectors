@@ -6,6 +6,10 @@ body {
   margin: 0;
 }
 
+img {
+  display: block;
+}
+
 @property --percentage {
   inherits: false;
   initial-value: 0%;
