@@ -1,13 +1,10 @@
+/* eslint-disable no-param-reassign */
 require('dotenv').config({
   path: './.env.development',
 });
 
 // DOCS!
 // https://contentful.github.io/contentful-management.js/contentful-management/9.0.0/interfaces/ContentType.html#update
-/*
-  TODO:
-  Editor interface methods to add help text
-*/
 
 const contentful = require('contentful-management');
 
@@ -97,6 +94,21 @@ client.getSpace(spaceId)
   .then((contentType) => contentType.publish())
   .then((contentType) => {
     console.log(`${contentType.sys.id} is published`);
+
+    // Add help text
+    client.getSpace(spaceId)
+      .then((space) => space.getEnvironment(envName))
+      .then((environment) => environment.getEditorInterfaceForContentType('videoWithCaption'))
+      .then((editorInterface) => {
+        editorInterface.controls[0].settings = { helpText: 'Internal title. This is not displayed in the application.' };
+        editorInterface.controls[1].settings = { helpText: 'Name of the video. This will populate the selection name on the home screen' };
+        editorInterface.controls[2].settings = { helpText: 'The video associated with the caption file' };
+        editorInterface.controls[3].settings = { helpText: 'Caption file. Only use files with .vtt extension.' };
+        editorInterface.controls[4].settings = { helpText: 'Image to accompany video selection on the home screen. Can be used as the selection "button".' };
+        return editorInterface.update();
+      })
+      .then((editorInterface) => console.log(`Editor interface ${editorInterface.sys.id} updated.`))
+      .catch(console.error);
     // IN PROGRESS - Create empty video with caption entry
     // client.getSpace(spaceId)
     //   .then((space) => space.getEnvironment(envName))
@@ -212,6 +224,24 @@ client.getSpace(spaceId)
   .then((contentType) => contentType.publish())
   .then((contentType) => {
     console.log(`${contentType.sys.id} is published`);
+
+    // Add help text
+    client.getSpace(spaceId)
+      .then((space) => space.getEnvironment(envName))
+      .then((environment) => environment.getEditorInterfaceForContentType('videoSelector'))
+      .then((editorInterface) => {
+        editorInterface.controls[0].settings = { helpText: 'The web route of the selector' };
+        editorInterface.controls[1].settings = { helpText: 'Internal title. This is not displayed in the application.' };
+        editorInterface.controls[2].settings = { helpText: 'Title for the application to be displayed on the home screen. Example "STEM Stories"' };
+        editorInterface.controls[3].settings = { helpText: 'Optional. Use this field to add a background graphic to the video selection screen' };
+        editorInterface.controls[4].settings = { helpText: 'Width of the screen used in pixels. The default value of 1920 assumes a standard monitor in landscape mode.' };
+        editorInterface.controls[5].settings = { helpText: 'Height of the display screen used. The default of 1080 assumes a standard monitor in landscape mode.' };
+        editorInterface.controls[6].settings = { helpText: 'The videos included in your selector. These must be "Video with caption" entries in contentful.' };
+        return editorInterface.update();
+      })
+      .then((editorInterface) => console.log(`Editor interface ${editorInterface.sys.id} updated.`))
+      .catch(console.error);
+
     // IN PROGRESS - create empty entry
     // client.getSpace(spaceId)
     //   .then((space) => space.getEnvironment(envName))
