@@ -1,10 +1,11 @@
 /* eslint-disable no-shadow */
+
+// IN PROGRESS - feature add, script that uploads example content
 require('dotenv').config({
   path: '.env.development',
 });
 
 const fs = require('fs');
-
 const contentful = require('contentful-management');
 
 // Use the contentful management api token, not the content delivery api

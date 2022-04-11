@@ -1,5 +1,5 @@
 require('dotenv').config({
-  path: '.env.development',
+  path: './.env.development',
 });
 
 // DOCS!
@@ -7,7 +7,6 @@ require('dotenv').config({
 /*
   TODO:
   Editor interface methods to add help text
-  Add script to package.json
 */
 
 const contentful = require('contentful-management');
@@ -23,7 +22,7 @@ const spaceId = process.env.CONTENTFUL_SPACE_ID;
 // Create video with caption content type
 client.getSpace(spaceId)
   .then((space) => space.getEnvironment(envName))
-  .then((environment) => environment.createContentTypeWithId('videoWithCaptionTest', {
+  .then((environment) => environment.createContentTypeWithId('videoWithCaption', {
     name: 'Video with caption',
     description: 'Pairs a video asset with one or more caption files',
     fields: [
@@ -98,23 +97,23 @@ client.getSpace(spaceId)
   .then((contentType) => contentType.publish())
   .then((contentType) => {
     console.log(`${contentType.sys.id} is published`);
-    // Create empty video with caption entry
-    client.getSpace(spaceId)
-      .then((space) => space.getEnvironment(envName))
-      .then((environment) => environment.createEntry('videoWithCaptionTest', {
-        fields: {
-          title: { 'en-US': 'Example Video with Caption' },
-          titleDisplay: { 'en-US': 'Awesome Example Video!' },
-        },
-      }))
-      .then((entry) => console.log(entry));
+    // IN PROGRESS - Create empty video with caption entry
+    // client.getSpace(spaceId)
+    //   .then((space) => space.getEnvironment(envName))
+    //   .then((environment) => environment.createEntry('videoWithCaption', {
+    //     fields: {
+    //       title: { 'en-US': 'Example Video with Caption' },
+    //       titleDisplay: { 'en-US': 'Awesome Example Video!' },
+    //     },
+    //   }))
+    // .then((entry) => console.log(entry));
   })
   .catch(console.error);
 
 // Create video selector content type
 client.getSpace(spaceId)
   .then((space) => space.getEnvironment(envName))
-  .then((environment) => environment.createContentTypeWithId('videoSelectorTest', {
+  .then((environment) => environment.createContentTypeWithId('videoSelector', {
     name: 'Video Selector',
     description: 'Creates a video selector kiosk app',
     displayField: 'slug',
@@ -213,18 +212,19 @@ client.getSpace(spaceId)
   .then((contentType) => contentType.publish())
   .then((contentType) => {
     console.log(`${contentType.sys.id} is published`);
-    // Create empty entry
-    client.getSpace(spaceId)
-      .then((space) => space.getEnvironment(envName))
-      .then((environment) => environment.createEntry('videoSelectorTest', {
-        fields: {
-          slug: { 'en-US': 'example2' },
-          title: { 'en-US': 'My Awesome Example' },
-          displayTitle: { 'en-US': 'My Awesome Example' },
-          screenWidth: { 'en-US': 1920 },
-          screenHeight: { 'en-US': 1080 },
-        },
-      }))
-      .then((entry) => console.log(entry));
+    // IN PROGRESS - create empty entry
+    // client.getSpace(spaceId)
+    //   .then((space) => space.getEnvironment(envName))
+    //   .then((environment) => environment.createEntry('videoSelector', {
+    //     fields: {
+    //       slug: { 'en-US': 'example' },
+    //       title: { 'en-US': 'My Awesome Example' },
+    //       displayTitle: { 'en-US': 'My Awesome Example' },
+    //       screenWidth: { 'en-US': 1920 },
+    //       screenHeight: { 'en-US': 1080 },
+    //       selections: { 'en-US': [] },
+    //     },
+    //   }))
+    // .then((entry) => console.log(entry));
   })
   .catch(console.error);
