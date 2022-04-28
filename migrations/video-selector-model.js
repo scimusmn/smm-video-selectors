@@ -133,7 +133,7 @@ module.exports = function (migration) {
   });
 
   videoSelector.createField('backgroundGraphic', {
-    name: 'Media',
+    name: 'Background graphic',
     type: 'Link',
     localized: false,
     required: false,

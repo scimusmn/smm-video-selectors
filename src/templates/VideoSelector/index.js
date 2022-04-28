@@ -8,7 +8,7 @@ export const pageQuery = graphql`
     enContent:contentfulVideoSelector(
       node_locale: {eq:"en-US"},
       slug: { eq: $slug }) {
-        displayTitle
+        titleDisplay
         screenWidth
         screenHeight
         backgroundGraphic {
@@ -39,7 +39,7 @@ export const pageQuery = graphql`
     esContent:contentfulVideoSelector(
       node_locale: {eq:"ar"},
       slug: { eq: $slug }) {
-        displayTitle
+        titleDisplay
         selections {
           titleDisplay
           caption {
@@ -60,6 +60,8 @@ export const pageQuery = graphql`
 
 function VideoSelector(all) {
   const { data } = all;
+  console.log(data);
+  let lang2Content = [];
   const lang1Content = data.enContent.selections.map((selection) => ({
     mediaRef: selection.media.localFile.publicURL,
     lang1Name: selection.titleDisplay,
@@ -68,10 +70,12 @@ function VideoSelector(all) {
       ? selection.selectionImage.localFile.publicURL : null,
   }));
 
-  const lang2Content = data.esContent.selections.map((selection) => ({
-    lang2Name: selection.titleDisplay,
-    lang2Track: selection.caption.localFile.publicURL,
-  }));
+  if (data.esContent) {
+    lang2Content = data.esContent.selections.map((selection) => ({
+      lang2Name: selection.titleDisplay,
+      lang2Track: selection.caption.localFile.publicURL,
+    }));
+  }
 
   const content = [];
   for (let i = 0; i < lang1Content.length; i += 1) {
@@ -92,7 +96,7 @@ function VideoSelector(all) {
       screenHeight={screenHeight}
       screenWidth={screenWidth}
       titleLang1={data.enContent.displayTitle}
-      titleLang2={data.esContent.displayTitle}
+      titleLang2={data.esContent ? data.esContent.displayTitle : null}
       graphic={data.enContent.backgroundGraphic
         ? data.enContent.backgroundGraphic.localFile.publicURL : null}
     />
