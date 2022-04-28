@@ -9,6 +9,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
+    "contentful-clean-space": "^0.9.0",
     "dotenv": "^14.3.2",
     "gatsby": "^4.6.0",
     "gatsby-plugin-fontawesome-css": "^1.1.0",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "chalk": "^4.1.2",
+    "command-exists": "^1.2.9",
     "contentful-management": "^8.1.0",
     "depcheck": "^1.4.3",
     "eslint": "^8.7.0",
@@ -57,7 +59,8 @@
   "scripts": {
     "build": "gatsby clean && gatsby build",
     "clean": "gatsby clean",
-    "create-model": "node migrations/video-selector-model.js",
+    "create-model": "node scripts/run-migration.js ./migrations/video-selector-model2.js",
+    "clean-space": "node scripts/clean-space.js",
     "depcheck": "node -r esm scripts/depcheck.js",
     "develop": "gatsby develop --port 3000",
     "install:arduino-base": "node scripts/install-arduino-base.js",
