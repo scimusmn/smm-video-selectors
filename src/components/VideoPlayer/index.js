@@ -16,8 +16,7 @@ function VideoPlayer(props) {
   } = props;
 
   const videoRef = useRef(null);
-  const [videoTime, setVideoTime] = useState(0);
-
+  const [fillAmount, setFillAmount] = useState(0);
   const captions1 = useCaptions(videoRef, 0, true);
   let captions2 = useCaptions(videoRef, 1, true);
 
@@ -42,7 +41,11 @@ function VideoPlayer(props) {
     // go to select screen when video is done
     videoRef.current.onended = () => window.location.reload();
     // set time for progress bar animation
-    setVideoTime(videoRef.current.duration);
+    videoRef.current.addEventListener('timeupdate', () => {
+      const percent = Math.floor((100 / (videoRef.current.duration))
+      * videoRef.current.currentTime);
+      setFillAmount(`${percent.toString()}%`);
+    });
   }
 
   return (
@@ -66,7 +69,8 @@ function VideoPlayer(props) {
         </div>
         <div className="captions captions2">{wrappedCaptions2}</div>
       </div>
-      <div className="progress" style={{ animation: `timer ${videoTime}s 1 linear` }} />
+      <div className="progress-background" />
+      <div className="progress" style={{ width: fillAmount }} />
       <div className="transport-container">
         <div className="icon" onClick={() => window.location.reload()} />
       </div>

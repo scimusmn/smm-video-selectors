@@ -59,7 +59,7 @@
   "scripts": {
     "build": "gatsby clean && gatsby build",
     "clean": "gatsby clean",
-    "create-model": "node scripts/run-migration.js ./migrations/video-selector-model2.js",
+    "create-model": "node scripts/run-migration.js ./migrations/video-selector-model.js",
     "clean-space": "node scripts/clean-space.js",
     "depcheck": "node -r esm scripts/depcheck.js",
     "develop": "gatsby develop --port 3000",

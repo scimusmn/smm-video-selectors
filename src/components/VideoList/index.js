@@ -53,6 +53,7 @@ function VideoList(props) {
         {showList && (
           <>
             <div className="graphic" style={{ backgroundImage: `url(${graphic})` }} />
+            <div>{content.titleDisplay}</div>
             <div className="title-container">
               <div className="title1">{titleLang1}</div>
               <div className="title2">{titleLang2 !== titleLang1 ? titleLang2 : null}</div>

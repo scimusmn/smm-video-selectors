@@ -10,18 +10,6 @@ img {
   display: block;
 }
 
-@property --percentage {
-  inherits: false;
-  initial-value: 0%;
-  syntax: "<percentage>";
-}
-
-@keyframes timer {
-  to {
-    --percentage: 100%;
-  }
-}
-
 /* *****EXAMPLE STYLES**** */
 
 .example .list-button {
@@ -126,7 +114,15 @@ img {
   bottom: 0;
   height: 20px;
   position: absolute;
-  width: var(--percentage);
+  width: 1920px;
+}
+
+.example .progress-background {
+  background: #828282;
+  bottom: 0;
+  height: 20px;
+  position: absolute;
+  width: 1920px;
 }
 
 .example .icon {
