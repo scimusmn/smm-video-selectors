@@ -60,7 +60,6 @@ export const pageQuery = graphql`
 
 function VideoSelector(all) {
   const { data } = all;
-  console.log(data);
   let lang2Content = [];
   const lang1Content = data.enContent.selections.map((selection) => ({
     mediaRef: selection.media.localFile.publicURL,
