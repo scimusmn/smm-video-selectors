@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-// import VideoPlayer from '@components/VideoPlayer';
+import VideoPlayer from '@components/VideoPlayer';
 
 // function VideoList(props) {
 //   const {
@@ -66,27 +66,35 @@ function VideoList(props) {
           }}
         >
           <h3>{selection.titleDisplay}</h3>
-          {selection.titleDisplays.map((titleDisplay, innerIndex) => (
-            <h4 key={innerIndex} className={`selection-title ${Object.keys(titleDisplay)}`}>{Object.values(titleDisplay)}</h4>
-          ))}
           <p>{selection.caption}</p>
-          <p>{selection.selectionImage}</p>
-          <p>{selection.media}</p>
+          <button type="button" className="list-button" id={`button${index}`}>
+            {selection.selectionImage && <img className="selection-image" src={selection.selectionImage?.localFile.publicURL} alt="selectionImage" />}
+            <div className="title-wrap">
+              {Object.keys(selection.titleDisplays).map((locale, i) => {
+                const title = selection.titleDisplays[locale];
+                return (
+                  <React.Fragment key={i}>
+                    {i !== 0 && <hr className={`divider ${locale}`} />}
+                    <h4 className={`selection-title ${locale}`}>{title}</h4>
+                  </React.Fragment>
+                );
+              })}
+            </div>
+          </button>
         </div>
       )}
-      {/* {videoSelection === index && (
+      {videoSelection === index && (
         <VideoPlayer
-          video={video}
+          video={selection}
           screenHeight={screenHeight}
           screenWidth={screenWidth}
         />
-      )} */}
+      )}
     </div>
   ));
 
   return (
     <div>
-      <h1>{videoSelection}</h1>
       <div className="component-container" style={{ height: `${screenHeight}px`, width: `${screenWidth}px` }}>
         <div className="list-container">
           {listItems}

@@ -20,8 +20,16 @@ function VideoPlayer(props) {
   const captions1 = useCaptions(videoRef, 0, true);
   let captions2 = useCaptions(videoRef, 1, true);
 
+  console.log('video', video);
+
+  const captionsTrack1 = video.captions['en-US']?.localFile.publicURL;
+  const captionsTrack2 = video.captions['es-MX']?.localFile.publicURL;
+
+  console.log('captionsTrack1', captionsTrack1);
+  console.log('captionsTrack2', captionsTrack2);
+
   // hide default second caption if there's only a primary language
-  if (video.lang2Track === video.lang1Track) {
+  if (captionsTrack1 === captionsTrack2) {
     captions2 = useCaptions(videoRef, 1, false);
   }
 
@@ -48,6 +56,9 @@ function VideoPlayer(props) {
     });
   }
 
+  console.log('video', video);
+  console.log(video.media);
+
   return (
     <>
       <div className="center player">
@@ -58,9 +69,9 @@ function VideoPlayer(props) {
           width={screenWidth}
           onLoadedData={() => onVideoLoad()}
         >
-          <source src={video.mediaRef} />
-          <track default kind="subtitles" src={video.lang1Track} />
-          <track default kind="subtitles" src={video.lang2Track} />
+          <source src={video.media} />
+          <track default kind="subtitles" src={captionsTrack1} />
+          <track default kind="subtitles" src={captionsTrack2} />
         </video>
       </div>
       <div className="captions-wrapper">

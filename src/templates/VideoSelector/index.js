@@ -68,11 +68,9 @@ function VideoSelector(all) {
 
   // Create array of localized content for a specific selection field
   function getLocales(field, selectionIndex) {
-    const locales = [];
+    const locales = {};
     selectors.forEach((selector) => {
-      locales.push({
-        [selector.node_locale]: selector.selections[selectionIndex][field],
-      });
+      locales[selector.node_locale] = selector.selections[selectionIndex][field];
     });
     return locales;
   }
@@ -85,7 +83,7 @@ function VideoSelector(all) {
       titleDisplays: getLocales('titleDisplay', index),
       caption: selection.caption?.localFile.publicURL,
       captions: getLocales('caption', index),
-      selectionImage: selection.selectionImage?.localFile.publicURL,
+      selectionImage: selection.selectionImage,
       selectionImages: getLocales('selectionImage', index),
       media: selection.media?.localFile.publicURL,
       medias: getLocales('media', index),
@@ -94,44 +92,6 @@ function VideoSelector(all) {
   });
 
   console.log('selections', selections);
-
-  // Create a content object for each selection
-  // const content = defaultSelector.selections.map((selection) => ({
-  //   mediaRef: selection.media.localFile.publicURL,
-  //   titleDisplay: selection.titleDisplay,
-  //   caption: selection.caption ? selection.caption.localFile.publicURL : null,
-  //   captions: selectors.map((selector) => ({
-  //     lang: selector.node_locale,
-  //     caption: selection.caption ? selection.caption.localFile.publicURL : null,
-  //   selectionImage: selection.selectionImage ?
-  // selection.selectionImage.localFile.publicURL : null,
-  // }));
-
-  // console.log('content', content);
-
-  // const lang1Content = defaultSelector.selections.map((selection) => ({
-  //   mediaRef: selection.media.localFile.publicURL,
-  //   titleDisplay: selection.titleDisplay,
-  //   caption: selection.caption ? selection.caption.localFile.publicURL : null,
-  //   selectionImageLang1: selection.selectionImage
-  //     ? selection.selectionImage.localFile.publicURL : null,
-  // }));
-
-  // let lang2Content = [];
-  // if (selectors.length > 1) {
-  //   lang2Content = selectors[1].selections.map((selection) => ({
-  //     lang2Name: selection.titleDisplay,
-  //     lang2Track: selection.caption.localFile.publicURL,
-  //   }));
-  // }
-
-  // const content = [];
-  // for (let i = 0; i < lang1Content.length; i += 1) {
-  //   content.push({
-  //     ...lang1Content[i],
-  //     ...lang2Content[i],
-  //   });
-  // }
 
   return (
     <div className={`video-selector ${defaultSelector.slug}`}>
