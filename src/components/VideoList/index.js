@@ -5,61 +5,89 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import VideoPlayer from '@components/VideoPlayer';
+// import VideoPlayer from '@components/VideoPlayer';
+
+// function VideoList(props) {
+//   const {
+//     content,
+//     screenHeight,
+//     screenWidth,
+//     graphic,
+//   } = props;
+//   const [showList, setShowList] = useState(true);
+//   const [videoSelection, setVideoSelection] = useState('');
+
+//   const listItems = content.map((video, index) => (
+//     <div key={index}>
+//       { showList && (
+//       <div onClick={() => {
+//         setVideoSelection(index);
+//         setShowList(false);
+//       }}
+//       >
+//         <button type="button" className="list-button" id={`button${index}`}>
+//           {video.selectionImage && <img className="selection-image"
+// src={video.selectionImage} alt="selectionImage" /> }
+//           <div className="title-wrap">
+//             <div className="video-name1">{video.lang1Name}</div>
+//             <hr />
+//             <div className="video-name2">
+// {video.lang2Name !== video.lang1Name ? video.lang2Name : null}</div>
+//           </div>
+//         </button>
+//       </div>
+//       )}
+//       {videoSelection === index && (
+//         <VideoPlayer
+//           video={video}
+//           screenHeight={screenHeight}
+//           screenWidth={screenWidth}
+//         />
+//       )}
+//     </div>
+//   ));
 
 function VideoList(props) {
   const {
-    content,
+    selections,
     screenHeight,
     screenWidth,
-    titleLang1,
-    titleLang2,
-    graphic,
-    slug,
   } = props;
   const [showList, setShowList] = useState(true);
   const [videoSelection, setVideoSelection] = useState('');
-  const listItems = content.map((video, index) => (
+
+  const listItems = selections.map((selection, index) => (
     <div key={index}>
-      { showList && (
-      <div onClick={() => {
-        setVideoSelection(index);
-        setShowList(false);
-      }}
-      >
-        <button type="button" className="list-button" id={`button${index}`}>
-          {video.selectionImageLang1 && <img className="selection-image" src={video.selectionImageLang1} alt="selectionImage" /> }
-          <div className="title-wrap">
-            <div className="video-name1">{video.lang1Name}</div>
-            <hr />
-            <div className="video-name2">{video.lang2Name !== video.lang1Name ? video.lang2Name : null}</div>
-          </div>
-        </button>
-      </div>
+      {showList && (
+        <div
+          onClick={() => {
+            setVideoSelection(index);
+            setShowList(false);
+          }}
+        >
+          <h3>{selection.titleDisplay}</h3>
+          {selection.titleDisplays.map((titleDisplay, innerIndex) => (
+            <h4 key={innerIndex} className={`selection-title ${Object.keys(titleDisplay)}`}>{Object.values(titleDisplay)}</h4>
+          ))}
+          <p>{selection.caption}</p>
+          <p>{selection.selectionImage}</p>
+          <p>{selection.media}</p>
+        </div>
       )}
-      {videoSelection === index && (
+      {/* {videoSelection === index && (
         <VideoPlayer
           video={video}
           screenHeight={screenHeight}
           screenWidth={screenWidth}
         />
-      )}
+      )} */}
     </div>
   ));
 
   return (
-    <div className={slug}>
+    <div>
+      <h1>{videoSelection}</h1>
       <div className="component-container" style={{ height: `${screenHeight}px`, width: `${screenWidth}px` }}>
-        {showList && (
-          <>
-            <div className="graphic" style={{ backgroundImage: `url(${graphic})` }} />
-            <div>{content.titleDisplay}</div>
-            <div className="title-container">
-              <div className="title1">{titleLang1}</div>
-              <div className="title2">{titleLang2 !== titleLang1 ? titleLang2 : null}</div>
-            </div>
-          </>
-        )}
         <div className="list-container">
           {listItems}
         </div>
@@ -68,20 +96,10 @@ function VideoList(props) {
   );
 }
 
-VideoList.defaultProps = {
-  titleLang1: '',
-  titleLang2: '',
-  graphic: '',
-};
-
 VideoList.propTypes = {
-  content: PropTypes.arrayOf(PropTypes.any).isRequired,
-  titleLang1: PropTypes.string,
-  titleLang2: PropTypes.string,
+  selections: PropTypes.arrayOf(PropTypes.any).isRequired,
   screenHeight: PropTypes.string.isRequired,
   screenWidth: PropTypes.string.isRequired,
-  graphic: PropTypes.string,
-  slug: PropTypes.string.isRequired,
 };
 
 export default VideoList;

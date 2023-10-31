@@ -13,6 +13,9 @@ module.exports = {
     'src/Arduino/arduino-base',
     'src/html.js',
   ],
+  parserOptions: {
+    ecmaVersion: 2020,
+  },
   rules: {
     'import/no-extraneous-dependencies': 'off',
     // The SMM team doesn't write React code in .jsx files exclusively, as is suggested in the
