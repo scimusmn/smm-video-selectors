@@ -7,46 +7,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import VideoPlayer from '@components/VideoPlayer';
 
-// function VideoList(props) {
-//   const {
-//     content,
-//     screenHeight,
-//     screenWidth,
-//     graphic,
-//   } = props;
-//   const [showList, setShowList] = useState(true);
-//   const [videoSelection, setVideoSelection] = useState('');
-
-//   const listItems = content.map((video, index) => (
-//     <div key={index}>
-//       { showList && (
-//       <div onClick={() => {
-//         setVideoSelection(index);
-//         setShowList(false);
-//       }}
-//       >
-//         <button type="button" className="list-button" id={`button${index}`}>
-//           {video.selectionImage && <img className="selection-image"
-// src={video.selectionImage} alt="selectionImage" /> }
-//           <div className="title-wrap">
-//             <div className="video-name1">{video.lang1Name}</div>
-//             <hr />
-//             <div className="video-name2">
-// {video.lang2Name !== video.lang1Name ? video.lang2Name : null}</div>
-//           </div>
-//         </button>
-//       </div>
-//       )}
-//       {videoSelection === index && (
-//         <VideoPlayer
-//           video={video}
-//           screenHeight={screenHeight}
-//           screenWidth={screenWidth}
-//         />
-//       )}
-//     </div>
-//   ));
-
 function VideoList(props) {
   const {
     selections,
