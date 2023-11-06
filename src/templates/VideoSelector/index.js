@@ -66,7 +66,7 @@ function VideoSelector(all) {
   const defaultLocale = data.allContentfulLocale.edges.find(({ node }) => node.default).node.code;
   const defaultSelector = selectors.find((selector) => selector.node_locale === defaultLocale);
 
-  // Create array of localized content for a specific selection field
+  // Create array of localized content based on a specific selection field
   function getLocales(field, selectionIndex) {
     const locales = {};
     selectors.forEach((selector) => {
@@ -75,8 +75,8 @@ function VideoSelector(all) {
     return locales;
   }
 
-  // Loop over defaultSelector's selections to create selection objects,
-  // while mixing in other locales as necessaary
+  // Loop over defaultSelector's selections to create selection objects
+  // Mix in available locales as available
   const selections = defaultSelector.selections.map((selection, index) => {
     const selectionObject = {
       titleDisplay: selection.titleDisplay,
@@ -90,8 +90,6 @@ function VideoSelector(all) {
     };
     return selectionObject;
   });
-
-  console.log('selections', selections);
 
   return (
     <div className={`video-selector ${defaultSelector.slug}`}>
