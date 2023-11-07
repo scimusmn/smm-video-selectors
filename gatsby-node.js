@@ -19,18 +19,10 @@ exports.createPages = async ({ actions, graphql }) => {
     // Query Contentful content types that render to a page
     // The slug field is the bare minimum required for page creation
     data: {
-      allLocales,
       allVideoSelectorData,
     },
   } = await graphql(`
     {
-      allLocales: allContentfulLocale {
-        edges {
-          node {
-            code
-          }
-        }
-      }
       allVideoSelectorData: allContentfulVideoSelector {
         edges {
           node {
@@ -50,10 +42,6 @@ exports.createPages = async ({ actions, graphql }) => {
       template: './src/templates/VideoSelector/index.js',
     },
   ];
-
-  // Get all locale codes
-  const locales = allLocales.edges.map(({ node }) => node.code);
-  console.log('locales', locales);
 
   pageTypes.forEach((pageType) => {
     pageType.entries.forEach(({ node }) => {

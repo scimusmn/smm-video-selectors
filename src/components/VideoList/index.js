@@ -25,8 +25,6 @@ function VideoList(props) {
             setShowList(false);
           }}
         >
-          <h3>{selection.titleDisplay}</h3>
-          <p>{selection.caption}</p>
           <button type="button" className="list-button" id={`button${index}`}>
             {selection.selectionImage && <img className="selection-image" src={selection.selectionImage?.localFile.publicURL} alt="selectionImage" />}
             <div className="title-wrap">
