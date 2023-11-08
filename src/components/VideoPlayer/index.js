@@ -4,7 +4,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/forbid-prop-types */
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import useCaptions from '../../useCaptions';
 
@@ -17,34 +17,29 @@ function VideoPlayer(props) {
 
   const videoRef = useRef(null);
   const [fillAmount, setFillAmount] = useState(0);
-  const captions1 = useCaptions(videoRef, 0, true);
-  let captions2 = useCaptions(videoRef, 1, true);
 
-  // hide default second caption if there's only a primary language
-  if (video.lang2Track === video.lang1Track) {
-    captions2 = useCaptions(videoRef, 1, false);
-  }
-
-  const [wrappedCaptions1, setWrappedCaptions1] = useState('');
-  const [wrappedCaptions2, setWrappedCaptions2] = useState('');
-
-  useEffect(() => {
-    setWrappedCaptions1(captions1);
-    setWrappedCaptions2(captions2);
-  }, [captions1, captions2]);
+  const captions = Object.keys(video.captions).map(
+    (locale) => useCaptions(videoRef, locale, true),
+  );
 
   function onVideoLoad() {
-    // if there are 2 languages, show both
-    videoRef.current.textTracks[1].mode = 'showing';
+    // Set all textTrack modes to 'showing'
+    Object.keys(videoRef.current.textTracks).forEach((key) => {
+      const track = videoRef.current.textTracks[key];
+      if (track) track.mode = 'showing';
+    });
+
     // play when selected
     videoRef.current.play();
     // go to select screen when video is done
     videoRef.current.onended = () => window.location.reload();
     // set time for progress bar animation
     videoRef.current.addEventListener('timeupdate', () => {
-      const percent = Math.floor((100 / (videoRef.current.duration))
-      * videoRef.current.currentTime);
-      setFillAmount(`${percent.toString()}%`);
+      const percent = videoRef.current.currentTime / videoRef.current.duration;
+      // Round to the nearest third decimal to avoid overloading state updates.
+      // We also multiply by 100 to get a whole number usable by CSS.
+      const rounded = (Math.round(percent * 1000) / 1000) * 100;
+      if (rounded !== fillAmount) setFillAmount(rounded);
     });
   }
 
@@ -58,19 +53,34 @@ function VideoPlayer(props) {
           width={screenWidth}
           onLoadedData={() => onVideoLoad()}
         >
-          <source src={video.mediaRef} />
-          <track default kind="subtitles" src={video.lang1Track} />
-          <track default kind="subtitles" src={video.lang2Track} />
+          <source src={video.media} />
+          {Object.keys(video.captions).map((locale) => {
+            const captionFile = video.captions[locale]?.localFile.publicURL;
+            if (!captionFile) return null;
+            return (
+              <track
+                key={locale}
+                id={locale}
+                srcLang={locale}
+                src={captionFile}
+                kind="subtitles"
+                default
+              />
+            );
+          })}
         </video>
       </div>
       <div className="captions-wrapper">
-        <div className="captions">
-          {wrappedCaptions1}
-        </div>
-        <div className="captions captions2">{wrappedCaptions2}</div>
+        {Object.keys(video.captions).map((locale, index) => (
+          <div key={locale} className={`captions captions${index} ${locale}`}>
+            {captions[index]}
+          </div>
+        ))}
       </div>
-      <div className="progress-background" />
-      <div className="progress" style={{ width: fillAmount }} />
+      <div className="progress-container">
+        <div className="progress-background" />
+        <div className="progress" style={{ width: `${fillAmount}%` }} />
+      </div>
       <div className="transport-container">
         <div className="icon" onClick={() => window.location.reload()} />
       </div>

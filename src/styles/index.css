@@ -77,7 +77,7 @@ img {
   position: absolute;
 }
 
-.example .captions {
+.cexample .captions {
   bottom: 170px;
   font-size: 35px;
   font-weight: 900;
@@ -87,9 +87,20 @@ img {
   text-align: center;
 }
 
-.example .captions2 {
-  bottom: 100px;
-  color: gold;
+.captions-wrapper .captions1 {
+  color: red;
+}
+
+.captions-wrapper .captions2 {
+  color: green;
+}
+
+.captions-wrapper .captions3 {
+  color: purple;
+}
+
+.captions-wrapper .captions4 {
+  color: blue;
 }
 
 .example .captions-wrapper {
