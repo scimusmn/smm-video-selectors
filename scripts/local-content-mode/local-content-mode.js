@@ -22,13 +22,13 @@ rl.question(
       console.log(chalk.green('Reconfiguring smm-video-selector for local content mode...'));
 
       console.log(chalk.green('Copying plugins folder...'));
-      execSync('cp -f -r ./scripts/local-content-mode/files/plugins ./');
+      execSync('cp -f -r ./scripts/local-mode/files/plugins ./');
 
       console.log(chalk.green('Copying content folder...'));
-      execSync('cp -f -r ./scripts/local-content-mode/files/content ./');
+      execSync('cp -f -r ./scripts/local-mode/files/content ./');
 
       console.log(chalk.green('Copying gatsby-config.js...'));
-      execSync('cp -f ./scripts/local-content-mode/files/gatsby-config.js ./');
+      execSync('cp -f ./scripts/local-mode/files/gatsby-config.js ./');
 
       console.log(chalk.green('Deleting src/pages/contentful-example.js...'));
       execSync('rm -f ./src/pages/contentful-example.js');

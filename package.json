@@ -70,7 +70,7 @@
     "lint": "npm-run-all lint:*",
     "lint:code": "node_modules/.bin/eslint .",
     "lint:style": "node_modules/.bin/stylelint \"**/*.*css\"",
-    "local-content-mode": "node scripts/local-content-mode/local-content-mode.js",
+    "local-mode": "node scripts/local-mode/local-mode.js",
     "serve": "gatsby serve --port 3000"
     
   }
