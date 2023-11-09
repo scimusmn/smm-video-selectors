@@ -1,4 +1,14 @@
 /* eslint no-console: 0 */
+/*
+  TODO: move/copy these instructions into developer video selector documentation
+  How to set up a video selector project with local content mode:
+  1. run `yarn local-mode` in your terminal
+  2. follow the prompts
+  3. run `yarn clean && yarn develop` and ensure the project builds and runs
+  4. you should see dummy content that matches the json in static/content/content.json
+  5. you can now edit the content in static/content/content.json
+  6. commit your changes and push to github
+*/
 
 const chalk = require('chalk');
 const { execSync } = require('child_process');
@@ -25,7 +35,7 @@ rl.question(
       execSync('cp -f -r ./scripts/local-mode/files/plugins ./');
 
       console.log(chalk.green('Copying content folder...'));
-      execSync('cp -f -r ./scripts/local-mode/files/content ./');
+      execSync('cp -f -r ./scripts/local-mode/files/content ./static');
 
       console.log(chalk.green('Copying gatsby-config.js...'));
       execSync('cp -f ./scripts/local-mode/files/gatsby-config.js ./');
