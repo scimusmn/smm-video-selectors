@@ -15,19 +15,19 @@
             "title": "My videos about bugs",
             "screenWidth": 1920,
             "screenHeight": 1080,
-            "backgroundAsset": "/content/images/bug.png",
+            "backgroundAsset": "/images/bug.png",
             "selections": [
                 {
                     "title": "Caterpillar",
-                    "caption": "/content/captions/example-captions-en-US.vtt",
-                    "media": "/content/videos/video-1.mp4",
-                    "selectionImage": "/content/images/bug.png"
+                    "caption": "/captions/example-captions-en-US.vtt",
+                    "media": "/videos/video-1.mp4",
+                    "selectionImage": "/images/bug.png"
                 },
                 {
                     "title": "Ladybug",
-                    "caption": "/content/captions/example-captions-en-US.vtt",
-                    "media": "/content/videos/video-1.mp4",
-                    "selectionImage": "/content/images/bonsai.png"
+                    "caption": "/captions/example-captions-en-US.vtt",
+                    "media": "/videos/video-1.mp4",
+                    "selectionImage": "/images/bonsai.png"
                 }
             ]
         },
@@ -36,19 +36,19 @@
             "title": "Swag vids about mini trees",
             "screenWidth": 800,
             "screenHeight": 600,
-            "backgroundAsset": "/content/images/bonsai.png",
+            "backgroundAsset": "/images/bonsai.png",
             "selections": [
                 {
                     "title": "Red tree",
-                    "caption": "/content/captions/example-captions-en-US.vtt",
-                    "media": "/content/videos/video-1.mp4",
-                    "selectionImage": "/content/images/bonsai.png"
+                    "caption": "/captions/example-captions-en-US.vtt",
+                    "media": "/videos/video-1.mp4",
+                    "selectionImage": "/images/bonsai.png"
                 },
                 {
                     "title": "Green tree",
-                    "caption": "/content/captions/example-captions-es-MX.vtt",
-                    "media": "/content/videos/video-1.mp4",
-                    "selectionImage": "/content/images/bug.png"
+                    "caption": "/captions/example-captions-es-MX.vtt",
+                    "media": "/videos/video-1.mp4",
+                    "selectionImage": "/images/bug.png"
                 }
             ]
         }

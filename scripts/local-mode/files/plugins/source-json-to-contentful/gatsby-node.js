@@ -1,6 +1,6 @@
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => {
   // eslint-disable-next-line global-require, import/no-unresolved
-  const jsonData = require('../../static/content/content.json');
+  const jsonData = require('../../static/content.json');
 
   // Transform Locales from JSON into Contentful structure
   jsonData.locales.forEach((locale) => {
