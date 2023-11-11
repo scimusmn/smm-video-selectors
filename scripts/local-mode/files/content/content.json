@@ -2,17 +2,22 @@
     "locales": [
         {
             "code": "en-US",
+            "name": "English",
             "default": true
         },
         {
             "code": "es-MX",
+            "name": "Spanish",
             "default": false
         }
     ],
     "videoSelectors": [
         {
             "slug": "bugs",
-            "title": "My videos about bugs",
+            "title": {
+                "en-US": "My videos about bugs",
+                "es-MX": "Mis videos sobre insectos"
+            },
             "screenWidth": 1920,
             "screenHeight": 1080,
             "backgroundAsset": "/images/bug.png",
@@ -27,13 +32,13 @@
                     "title": "Ladybug",
                     "caption": "/captions/example-captions-en-US.vtt",
                     "media": "/videos/video-1.mp4",
-                    "selectionImage": "/images/bonsai.png"
+                    "selectionImage": "/images/bug.png"
                 }
             ]
         },
         {
             "slug": "bonsais",
-            "title": "Swag vids about mini trees",
+            "title": "My videos about miniature trees",
             "screenWidth": 800,
             "screenHeight": 600,
             "backgroundAsset": "/images/bonsai.png",
@@ -48,7 +53,7 @@
                     "title": "Green tree",
                     "caption": "/captions/example-captions-es-MX.vtt",
                     "media": "/videos/video-1.mp4",
-                    "selectionImage": "/images/bug.png"
+                    "selectionImage": "/images/bonsai.png"
                 }
             ]
         }
