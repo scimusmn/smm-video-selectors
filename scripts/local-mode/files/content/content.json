@@ -20,40 +20,67 @@
             },
             "screenWidth": 1920,
             "screenHeight": 1080,
-            "backgroundAsset": "/images/bug.png",
+            "backgroundAsset": "/images/caterpillar.png",
             "selections": [
                 {
-                    "title": "Caterpillar",
-                    "caption": "/captions/example-captions-en-US.vtt",
+                    "title": {
+                        "en-US": "Caterpillar",
+                        "es-MX": "Oruga"
+                    },
+                    "caption": {
+                        "en-US": "/captions/example-captions-en-US.vtt",
+                        "es-MX": "/captions/example-captions-es-MX.vtt"
+                    },
                     "media": "/videos/video-1.mp4",
-                    "selectionImage": "/images/bug.png"
+                    "selectionImage": "/images/caterpillar.png"
                 },
                 {
-                    "title": "Ladybug",
-                    "caption": "/captions/example-captions-en-US.vtt",
+                    "title": {
+                        "en-US": "Ladybug",
+                        "es-MX": "Mariquita"
+                    },
+                    "caption": {
+                        "en-US": "/captions/example-captions-en-US.vtt",
+                        "es-MX": "/captions/example-captions-es-MX.vtt"
+                    },
                     "media": "/videos/video-1.mp4",
-                    "selectionImage": "/images/bug.png"
+                    "selectionImage": "/images/ladybug.png"
                 }
             ]
         },
         {
             "slug": "bonsais",
-            "title": "My videos about miniature trees",
+            "title": {
+                "en-US": "My videos about miniature trees",
+                "es-MX": "Mis videos sobre árboles en miniatura"
+            },
             "screenWidth": 800,
             "screenHeight": 600,
-            "backgroundAsset": "/images/bonsai.png",
+            "backgroundAsset": "/images/green.png",
             "selections": [
                 {
-                    "title": "Red tree",
-                    "caption": "/captions/example-captions-en-US.vtt",
+                    "title": {
+                        "en-US": "Red tree",
+                        "es-MX": "Árbol rojo"
+                    },
+                    "caption": {
+                        "en-US": "/captions/example-captions-en-US.vtt",
+                        "es-MX": "/captions/example-captions-es-MX.vtt"
+                    },
                     "media": "/videos/video-1.mp4",
-                    "selectionImage": "/images/bonsai.png"
+                    "selectionImage": "/images/red.png"
                 },
                 {
-                    "title": "Green tree",
-                    "caption": "/captions/example-captions-es-MX.vtt",
+                    "title": {
+                        "en-US": "Green tree",
+                        "es-MX": "Árbol verde"
+                    },
+                    "caption": {
+                        "en-US": "/captions/example-captions-en-US.vtt",
+                        "es-MX": "/captions/example-captions-es-MX.vtt"
+                    },
                     "media": "/videos/video-1.mp4",
-                    "selectionImage": "/images/bonsai.png"
+                    "selectionImage": "/images/green.png"
                 }
             ]
         }

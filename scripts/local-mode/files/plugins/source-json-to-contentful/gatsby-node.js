@@ -66,7 +66,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => 
         selections: selector.selections.map((selection) => ({
           titleDisplay: getLocalized(selection.title, locale.code),
           caption: {
-            title: 'title-does-this-even-matter',
+            title: 'caption-title-here', // What is this for?
             localFile: {
               publicURL: getLocalized(selection.caption, locale.code),
             },
