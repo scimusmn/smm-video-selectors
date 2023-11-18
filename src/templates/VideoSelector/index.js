@@ -102,13 +102,10 @@ function VideoSelector(all) {
         }}
       />
       <div className="title-container">
-        {/* Render all locale titles that don't match the default locale */}
         { selectors.map((selector) => (
-          selector.titleDisplay !== defaultSelector.titleDisplay && selector.titleDisplay ? (
-            <h1 key={`title-${selector.node_locale}`} className={`title ${selector.node_locale}`}>
-              {selector.titleDisplay}
-            </h1>
-          ) : null
+          <h1 key={`title-${selector.node_locale}`} className={`title ${selector.node_locale}`}>
+            {selector.titleDisplay}
+          </h1>
         ))}
       </div>
       <VideoList
