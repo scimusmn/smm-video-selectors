@@ -12,6 +12,11 @@ img {
 
 /* *****EXAMPLE STYLES**** */
 
+/* These `example` classnames should be replaced with
+  * the slug of the video selector you would like to style.
+  * Every video selector is wrapped with its own slug
+  * as a classname so that it can be targeted and have different styles.
+*/
 .example .list-button {
   background-color: transparent;
   border: none;
