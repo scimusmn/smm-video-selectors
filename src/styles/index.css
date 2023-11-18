@@ -34,6 +34,9 @@ img {
 .example .component-container {
   background-color: gray;
   color: white;
+  left: 0;
+  position: absolute;
+  top: 0;
 }
 
 .example .list-container {
