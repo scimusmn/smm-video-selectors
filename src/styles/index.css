@@ -95,6 +95,28 @@ img {
   text-align: center;
 }
 
+.language-switcher {
+  bottom: 42px;
+  color: white;
+  font-size: 20px;
+  font-weight: 900;
+  left: 40px;
+  outline: none;
+  position: absolute;
+}
+
+.language-switcher .language {
+  background-color: rgb(255 255 255 / 25%);
+  border-radius: 5px;
+  margin-right: 15px;
+  padding: 7px;
+}
+
+.language-switcher .language a {
+  color: white;
+  text-decoration: none;
+}
+
 .captions-wrapper .captions1 {
   bottom: 150px;
   color: red;

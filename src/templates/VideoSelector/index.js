@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import VideoList from '@components/VideoList';
+import LanguageSwitcher from '../../components/LanguageSwitcher';
 
 export const pageQuery = graphql`
 
@@ -36,17 +37,21 @@ export const pageQuery = graphql`
     }
   }
 
-  query ($slug: String!) {
+  query ($slug: String!, $locales: [String]!) {
       allContentfulLocale {
         edges {
           node {
             code
             default
+            name
           }
         }
       }
       allContentfulVideoSelector (
-        filter: { slug: { eq: $slug } }
+        filter: {
+          slug: { eq: $slug }
+          node_locale: { in: $locales }
+        }
       ) {
         edges {
           node {
@@ -58,13 +63,25 @@ export const pageQuery = graphql`
 `;
 
 function VideoSelector(all) {
-  const { data } = all;
+  const { data, pageContext } = all;
+
+  // If only one locale is passed, create array with all other locales
+  // This is used to create a language switcher
+  let otherLocales = [];
+  if (pageContext.locales.length === 1) {
+    otherLocales = data.allContentfulLocale.edges.filter(
+      ({ node }) => node.code !== pageContext.locales[0],
+    );
+  }
 
   const selectors = data.allContentfulVideoSelector.edges.map(({ node }) => node);
 
   // Get default locale code
   const defaultLocale = data.allContentfulLocale.edges.find(({ node }) => node.default).node.code;
-  const defaultSelector = selectors.find((selector) => selector.node_locale === defaultLocale);
+  let defaultSelector = selectors.find((selector) => selector.node_locale === defaultLocale);
+  if (!defaultSelector) {
+    [defaultSelector] = selectors; // Default to first selector if default locale is not available
+  }
 
   // Create array of localized content based on a specific selection field
   function getLocales(field, selectionIndex) {
@@ -118,6 +135,9 @@ function VideoSelector(all) {
             : null
           }
       />
+      {otherLocales.length > 0 && (
+        <LanguageSwitcher otherLocales={otherLocales} slug={defaultSelector.slug} />
+      )}
     </div>
   );
 }
