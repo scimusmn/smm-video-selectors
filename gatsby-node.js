@@ -19,10 +19,18 @@ exports.createPages = async ({ actions, graphql }) => {
     // Query Contentful content types that render to a page
     // The slug field is the bare minimum required for page creation
     data: {
+      allLocaleData,
       allVideoSelectorData,
     },
   } = await graphql(`
     {
+      allLocaleData: allContentfulLocale {
+        edges {
+          node {
+            code
+          }
+        }
+      }
       allVideoSelectorData: allContentfulVideoSelector {
         edges {
           node {
@@ -32,6 +40,8 @@ exports.createPages = async ({ actions, graphql }) => {
       }
     }
   `);
+
+  const localeCodes = allLocaleData.edges.map(({ node }) => node.code);
 
   // Define how and where we create pages by pairing
   // Content Types to templates and slug prefixes.
@@ -51,8 +61,20 @@ exports.createPages = async ({ actions, graphql }) => {
           component: path.resolve(pageType.template),
           context: {
             slug: node.slug,
+            locales: localeCodes, // Pass all locale codes to default route
           },
           path: pageType.slugPrefix + node.slug,
+        });
+        // Create localized pages for each locale code
+        localeCodes.forEach((locale) => {
+          createPage({
+            component: path.resolve(pageType.template),
+            context: {
+              slug: node.slug,
+              locales: [locale], // Pass locale code to localized route
+            },
+            path: `/${locale}${pageType.slugPrefix}${node.slug}`,
+          });
         });
       }
     });

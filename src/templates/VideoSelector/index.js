@@ -1,57 +1,61 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-// import PropTypes from 'prop-types';
 import VideoList from '@components/VideoList';
+import LanguageSwitcher from '../../components/LanguageSwitcher';
 
 export const pageQuery = graphql`
-  query ($slug: String!) {
-    enContent:contentfulVideoSelector(
-      node_locale: {eq:"en-US"},
-      slug: { eq: $slug }) {
-        titleDisplay
-        screenWidth
-        screenHeight
-        backgroundGraphic {
-          localFile {
-            publicURL
-          }
+
+  fragment VideoSelectorFragment on ContentfulVideoSelector {
+    slug
+    node_locale
+    titleDisplay
+    screenWidth
+    screenHeight
+    backgroundGraphic {
+      localFile {
+        publicURL
+      }
+    }
+    selections {
+      titleDisplay,
+      caption {
+        title
+        localFile {
+          publicURL
+        } 
+      }
+      media {
+        localFile {
+          publicURL
         }
-        selections {
-          titleDisplay,
-          media {
-            localFile {
-              publicURL
-            }
-          }
-          caption {
-            title
-            localFile {
-              publicURL
-            } 
-          }
-          selectionImage {
-            localFile {
-              publicURL
-            }
+      }
+      selectionImage {
+        localFile {
+          publicURL
+        }
+      }
+    }
+  }
+
+  query ($slug: String!, $locales: [String]!) {
+      allContentfulLocale {
+        edges {
+          node {
+            code
+            default
+            name
           }
         }
       }
-    esContent:contentfulVideoSelector(
-      node_locale: {eq:"ar"},
-      slug: { eq: $slug }) {
-        titleDisplay
-        selections {
-          titleDisplay
-          caption {
-            title
-            localFile {
-              publicURL
-            } 
-          }
-          selectionImage {
-            localFile {
-              publicURL
-            }
+      allContentfulVideoSelector (
+        filter: {
+          slug: { eq: $slug }
+          node_locale: { in: $locales }
+        }
+      ) {
+        edges {
+          node {
+            ...VideoSelectorFragment
           }
         }
       }
@@ -59,47 +63,82 @@ export const pageQuery = graphql`
 `;
 
 function VideoSelector(all) {
-  const { data } = all;
-  console.log(data);
-  let lang2Content = [];
-  const lang1Content = data.enContent.selections.map((selection) => ({
-    mediaRef: selection.media.localFile.publicURL,
-    lang1Name: selection.titleDisplay,
-    lang1Track: selection.caption ? selection.caption.localFile.publicURL : null,
-    selectionImageLang1: selection.selectionImage
-      ? selection.selectionImage.localFile.publicURL : null,
-  }));
+  const { data, pageContext } = all;
 
-  if (data.esContent) {
-    lang2Content = data.esContent.selections.map((selection) => ({
-      lang2Name: selection.titleDisplay,
-      lang2Track: selection.caption.localFile.publicURL,
-    }));
+  // If only one locale is passed, create array with all other locales
+  // This is used to create a language switcher
+  let otherLocales = [];
+  if (pageContext.locales.length === 1) {
+    otherLocales = data.allContentfulLocale.edges.filter(
+      ({ node }) => node.code !== pageContext.locales[0],
+    );
   }
 
-  const content = [];
-  for (let i = 0; i < lang1Content.length; i += 1) {
-    content.push({
-      ...lang1Content[i],
-      ...lang2Content[i],
+  const selectors = data.allContentfulVideoSelector.edges.map(({ node }) => node);
+
+  // Get default locale code
+  const defaultLocale = data.allContentfulLocale.edges.find(({ node }) => node.default).node.code;
+  let defaultSelector = selectors.find((selector) => selector.node_locale === defaultLocale);
+  if (!defaultSelector) {
+    [defaultSelector] = selectors; // Default to first selector if default locale is not available
+  }
+
+  // Create array of localized content based on a specific selection field
+  function getLocales(field, selectionIndex) {
+    const locales = {};
+    selectors.forEach((selector) => {
+      locales[selector.node_locale] = selector.selections[selectionIndex][field];
     });
+    return locales;
   }
 
-  const screenHeight = data.enContent.screenHeight.toString();
-  const screenWidth = data.enContent.screenWidth.toString();
+  // Loop over defaultSelector's selections to create selection objects
+  // Mix in available locales as available
+  const selections = defaultSelector.selections.map((selection, index) => {
+    const selectionObject = {
+      titleDisplay: selection.titleDisplay,
+      titleDisplays: getLocales('titleDisplay', index),
+      caption: selection.caption?.localFile.publicURL,
+      captions: getLocales('caption', index),
+      selectionImage: selection.selectionImage,
+      selectionImages: getLocales('selectionImage', index),
+      media: selection.media?.localFile.publicURL,
+      medias: getLocales('media', index),
+    };
+    return selectionObject;
+  });
 
   return (
-    <VideoList
-      // eslint-disable-next-line react/destructuring-assignment
-      slug={all.pageContext.slug}
-      content={content}
-      screenHeight={screenHeight}
-      screenWidth={screenWidth}
-      titleLang1={data.enContent.displayTitle}
-      titleLang2={data.esContent ? data.esContent.displayTitle : null}
-      graphic={data.enContent.backgroundGraphic
-        ? data.enContent.backgroundGraphic.localFile.publicURL : null}
-    />
+    <div className={`video-selector ${defaultSelector.slug}`}>
+      <div
+        className="graphic background"
+        style={{
+          backgroundImage: `url(${defaultSelector.backgroundGraphic
+            ? defaultSelector.backgroundGraphic.localFile.publicURL
+            : null})`,
+        }}
+      />
+      <div className="title-container">
+        { selectors.map((selector) => (
+          <h1 key={`title-${selector.node_locale}`} className={`title ${selector.node_locale}`}>
+            {selector.titleDisplay}
+          </h1>
+        ))}
+      </div>
+      <VideoList
+        selections={selections}
+        screenHeight={defaultSelector.screenHeight.toString()}
+        screenWidth={defaultSelector.screenWidth.toString()}
+        graphic={
+          defaultSelector.backgroundGraphic
+            ? defaultSelector.backgroundGraphic.localFile.publicURL
+            : null
+          }
+      />
+      {otherLocales.length > 0 && (
+        <LanguageSwitcher otherLocales={otherLocales} slug={defaultSelector.slug} />
+      )}
+    </div>
   );
 }
 
