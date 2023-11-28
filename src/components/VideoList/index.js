@@ -26,7 +26,7 @@ function VideoList(props) {
           }}
         >
           <button type="button" className="list-button" id={`button${index}`}>
-            {selection.selectionImage && <img className="selection-image" src={selection.selectionImage?.localFile.publicURL} alt="selectionImage" />}
+            {selection.thumbnail && <img className="selection-image" src={selection.thumbnail?.localFile.publicURL} alt="selectionImage" />}
             <div className="title-wrap">
               {Object.keys(selection.titleDisplays).map((locale, i) => {
                 const title = selection.titleDisplays[locale];

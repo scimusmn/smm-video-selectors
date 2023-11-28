@@ -11,25 +11,25 @@ export const pageQuery = graphql`
     titleDisplay
     screenWidth
     screenHeight
-    backgroundGraphic {
+    backgroundAsset {
       localFile {
         publicURL
       }
     }
     selections {
       titleDisplay,
-      caption {
+      captionAsset {
         title
         localFile {
           publicURL
         } 
       }
-      media {
+      videoAsset {
         localFile {
           publicURL
         }
       }
-      selectionImage {
+      thumbnail {
         localFile {
           publicURL
         }
@@ -98,12 +98,12 @@ function VideoSelector(all) {
     const selectionObject = {
       titleDisplay: selection.titleDisplay,
       titleDisplays: getLocales('titleDisplay', index),
-      caption: selection.caption?.localFile.publicURL,
-      captions: getLocales('caption', index),
-      selectionImage: selection.selectionImage,
-      selectionImages: getLocales('selectionImage', index),
-      media: selection.media?.localFile.publicURL,
-      medias: getLocales('media', index),
+      captionAsset: selection.captionAsset?.localFile.publicURL,
+      captionAssets: getLocales('captionAsset', index),
+      thumbnail: selection.thumbnail,
+      thumbnails: getLocales('thumbnail', index),
+      videoAsset: selection.videoAsset?.localFile.publicURL,
+      videoAssets: getLocales('videoAsset', index),
     };
     return selectionObject;
   });
@@ -113,13 +113,13 @@ function VideoSelector(all) {
       <div
         className="graphic background"
         style={{
-          backgroundImage: `url(${defaultSelector.backgroundGraphic
-            ? defaultSelector.backgroundGraphic.localFile.publicURL
+          backgroundImage: `url(${defaultSelector.backgroundAsset
+            ? defaultSelector.backgroundAsset.localFile.publicURL
             : null})`,
         }}
       />
       <div className="title-container">
-        { selectors.map((selector) => (
+        {selectors.map((selector) => (
           <h1 key={`title-${selector.node_locale}`} className={`title ${selector.node_locale}`}>
             {selector.titleDisplay}
           </h1>
@@ -130,10 +130,10 @@ function VideoSelector(all) {
         screenHeight={defaultSelector.screenHeight.toString()}
         screenWidth={defaultSelector.screenWidth.toString()}
         graphic={
-          defaultSelector.backgroundGraphic
-            ? defaultSelector.backgroundGraphic.localFile.publicURL
+          defaultSelector.backgroundAsset
+            ? defaultSelector.backgroundAsset.localFile.publicURL
             : null
-          }
+        }
       />
       {otherLocales.length > 0 && (
         <LanguageSwitcher otherLocales={otherLocales} slug={defaultSelector.slug} />

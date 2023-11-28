@@ -18,7 +18,7 @@ function VideoPlayer(props) {
   const videoRef = useRef(null);
   const [fillAmount, setFillAmount] = useState(0);
 
-  const captions = Object.keys(video.captions).map(
+  const captions = Object.keys(video.captionAssets).map(
     (locale) => useCaptions(videoRef, locale, true),
   );
 
@@ -53,9 +53,9 @@ function VideoPlayer(props) {
           width={screenWidth}
           onLoadedData={() => onVideoLoad()}
         >
-          <source src={video.media} />
-          {Object.keys(video.captions).map((locale) => {
-            const captionFile = video.captions[locale]?.localFile.publicURL;
+          <source src={video.videoAsset} />
+          {Object.keys(video.captionAssets).map((locale) => {
+            const captionFile = video.captionAssets[locale]?.localFile.publicURL;
             if (!captionFile) return null;
             return (
               <track
@@ -71,7 +71,7 @@ function VideoPlayer(props) {
         </video>
       </div>
       <div className="captions-wrapper">
-        {Object.keys(video.captions).map((locale, index) => (
+        {Object.keys(video.captionAssets).map((locale, index) => (
           <div key={locale} className={`captions captions${index} ${locale}`}>
             {captions[index]}
           </div>
