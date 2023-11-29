@@ -1,5 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import { useIdleTimer } from 'react-idle-timer/legacy';
 import VideoList from '@components/VideoList';
 import LanguageSwitcher from '../../components/LanguageSwitcher';
 
@@ -11,6 +12,7 @@ export const pageQuery = graphql`
     titleDisplay
     screenWidth
     screenHeight
+    inactivityDelay
     backgroundAsset {
       localFile {
         publicURL
@@ -91,6 +93,17 @@ function VideoSelector(all) {
     });
     return locales;
   }
+
+  // Loads default selector after inactivity timeout
+  const onIdle = () => {
+    window.location = `${window.location.origin}/${defaultSelector.slug}`;
+  };
+
+  useIdleTimer({
+    onIdle,
+    timeout: defaultSelector.inactivityDelay * 1000,
+    throttle: 500,
+  });
 
   // Loop over defaultSelector's selections to create selection objects
   // Mix in available locales as available
