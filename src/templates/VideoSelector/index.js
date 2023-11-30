@@ -1,5 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import { useIdleTimer } from 'react-idle-timer/legacy';
 import VideoList from '@components/VideoList';
 import LanguageSwitcher from '../../components/LanguageSwitcher';
 
@@ -9,27 +10,26 @@ export const pageQuery = graphql`
     slug
     node_locale
     titleDisplay
-    screenWidth
-    screenHeight
-    backgroundGraphic {
+    inactivityDelay
+    backgroundAsset {
       localFile {
         publicURL
       }
     }
     selections {
       titleDisplay,
-      caption {
+      captionAsset {
         title
         localFile {
           publicURL
         } 
       }
-      media {
+      videoAsset {
         localFile {
           publicURL
         }
       }
-      selectionImage {
+      thumbnail {
         localFile {
           publicURL
         }
@@ -92,18 +92,29 @@ function VideoSelector(all) {
     return locales;
   }
 
+  // Loads default selector after inactivity timeout
+  const onIdle = () => {
+    window.location = `${window.location.origin}/${defaultSelector.slug}`;
+  };
+
+  useIdleTimer({
+    onIdle,
+    timeout: defaultSelector.inactivityDelay * 1000,
+    throttle: 500,
+  });
+
   // Loop over defaultSelector's selections to create selection objects
   // Mix in available locales as available
   const selections = defaultSelector.selections.map((selection, index) => {
     const selectionObject = {
       titleDisplay: selection.titleDisplay,
       titleDisplays: getLocales('titleDisplay', index),
-      caption: selection.caption?.localFile.publicURL,
-      captions: getLocales('caption', index),
-      selectionImage: selection.selectionImage,
-      selectionImages: getLocales('selectionImage', index),
-      media: selection.media?.localFile.publicURL,
-      medias: getLocales('media', index),
+      captionAsset: selection.captionAsset?.localFile.publicURL,
+      captionAssets: getLocales('captionAsset', index),
+      thumbnail: selection.thumbnail,
+      thumbnails: getLocales('thumbnail', index),
+      videoAsset: selection.videoAsset?.localFile.publicURL,
+      videoAssets: getLocales('videoAsset', index),
     };
     return selectionObject;
   });
@@ -113,13 +124,13 @@ function VideoSelector(all) {
       <div
         className="graphic background"
         style={{
-          backgroundImage: `url(${defaultSelector.backgroundGraphic
-            ? defaultSelector.backgroundGraphic.localFile.publicURL
+          backgroundImage: `url(${defaultSelector.backgroundAsset
+            ? defaultSelector.backgroundAsset.localFile.publicURL
             : null})`,
         }}
       />
       <div className="title-container">
-        { selectors.map((selector) => (
+        {selectors.map((selector) => (
           <h1 key={`title-${selector.node_locale}`} className={`title ${selector.node_locale}`}>
             {selector.titleDisplay}
           </h1>
@@ -127,13 +138,13 @@ function VideoSelector(all) {
       </div>
       <VideoList
         selections={selections}
-        screenHeight={defaultSelector.screenHeight.toString()}
-        screenWidth={defaultSelector.screenWidth.toString()}
+        // screenHeight={defaultSelector.screenHeight.toString()}
+        // screenWidth={defaultSelector.screenWidth.toString()}
         graphic={
-          defaultSelector.backgroundGraphic
-            ? defaultSelector.backgroundGraphic.localFile.publicURL
+          defaultSelector.backgroundAsset
+            ? defaultSelector.backgroundAsset.localFile.publicURL
             : null
-          }
+        }
       />
       {otherLocales.length > 0 && (
         <LanguageSwitcher otherLocales={otherLocales} slug={defaultSelector.slug} />

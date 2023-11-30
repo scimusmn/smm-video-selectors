@@ -154,6 +154,14 @@ img {
   display: none;
 }
 
+.example .player {
+  width: 1920px;
+}
+
+.example video {
+  width: 1920px;
+}
+
 .example .progress {
   background: white;
   bottom: 0;

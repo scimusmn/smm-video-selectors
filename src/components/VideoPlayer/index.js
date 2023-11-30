@@ -9,16 +9,12 @@ import PropTypes from 'prop-types';
 import useCaptions from '../../useCaptions';
 
 function VideoPlayer(props) {
-  const {
-    video,
-    screenHeight,
-    screenWidth,
-  } = props;
+  const { video } = props;
 
   const videoRef = useRef(null);
   const [fillAmount, setFillAmount] = useState(0);
 
-  const captions = Object.keys(video.captions).map(
+  const captions = Object.keys(video.captionAssets).map(
     (locale) => useCaptions(videoRef, locale, true),
   );
 
@@ -49,13 +45,11 @@ function VideoPlayer(props) {
         <video
           id="video"
           ref={videoRef}
-          height={screenHeight}
-          width={screenWidth}
           onLoadedData={() => onVideoLoad()}
         >
-          <source src={video.media} />
-          {Object.keys(video.captions).map((locale) => {
-            const captionFile = video.captions[locale]?.localFile.publicURL;
+          <source src={video.videoAsset} />
+          {Object.keys(video.captionAssets).map((locale) => {
+            const captionFile = video.captionAssets[locale]?.localFile.publicURL;
             if (!captionFile) return null;
             return (
               <track
@@ -71,7 +65,7 @@ function VideoPlayer(props) {
         </video>
       </div>
       <div className="captions-wrapper">
-        {Object.keys(video.captions).map((locale, index) => (
+        {Object.keys(video.captionAssets).map((locale, index) => (
           <div key={locale} className={`captions captions${index} ${locale}`}>
             {captions[index]}
           </div>
@@ -90,8 +84,6 @@ function VideoPlayer(props) {
 
 VideoPlayer.propTypes = {
   video: PropTypes.objectOf(PropTypes.any).isRequired,
-  screenHeight: PropTypes.string.isRequired,
-  screenWidth: PropTypes.string.isRequired,
 };
 
 export default VideoPlayer;
