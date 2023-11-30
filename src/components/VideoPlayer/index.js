@@ -9,11 +9,7 @@ import PropTypes from 'prop-types';
 import useCaptions from '../../useCaptions';
 
 function VideoPlayer(props) {
-  const {
-    video,
-    screenHeight,
-    screenWidth,
-  } = props;
+  const { video } = props;
 
   const videoRef = useRef(null);
   const [fillAmount, setFillAmount] = useState(0);
@@ -49,8 +45,6 @@ function VideoPlayer(props) {
         <video
           id="video"
           ref={videoRef}
-          height={screenHeight}
-          width={screenWidth}
           onLoadedData={() => onVideoLoad()}
         >
           <source src={video.videoAsset} />
@@ -90,8 +84,6 @@ function VideoPlayer(props) {
 
 VideoPlayer.propTypes = {
   video: PropTypes.objectOf(PropTypes.any).isRequired,
-  screenHeight: PropTypes.string.isRequired,
-  screenWidth: PropTypes.string.isRequired,
 };
 
 export default VideoPlayer;

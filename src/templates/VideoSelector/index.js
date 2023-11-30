@@ -10,8 +10,6 @@ export const pageQuery = graphql`
     slug
     node_locale
     titleDisplay
-    screenWidth
-    screenHeight
     inactivityDelay
     backgroundAsset {
       localFile {
@@ -140,8 +138,8 @@ function VideoSelector(all) {
       </div>
       <VideoList
         selections={selections}
-        screenHeight={defaultSelector.screenHeight.toString()}
-        screenWidth={defaultSelector.screenWidth.toString()}
+        // screenHeight={defaultSelector.screenHeight.toString()}
+        // screenWidth={defaultSelector.screenWidth.toString()}
         graphic={
           defaultSelector.backgroundAsset
             ? defaultSelector.backgroundAsset.localFile.publicURL

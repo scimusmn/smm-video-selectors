@@ -8,11 +8,7 @@ import PropTypes from 'prop-types';
 import VideoPlayer from '@components/VideoPlayer';
 
 function VideoList(props) {
-  const {
-    selections,
-    screenHeight,
-    screenWidth,
-  } = props;
+  const { selections } = props;
   const [showList, setShowList] = useState(true);
   const [videoSelection, setVideoSelection] = useState('');
 
@@ -44,8 +40,6 @@ function VideoList(props) {
       {videoSelection === index && (
         <VideoPlayer
           video={selection}
-          screenHeight={screenHeight}
-          screenWidth={screenWidth}
         />
       )}
     </div>
@@ -53,7 +47,7 @@ function VideoList(props) {
 
   return (
     <div>
-      <div className="component-container" style={{ height: `${screenHeight}px`, width: `${screenWidth}px` }}>
+      <div className="component-container">
         <div className="list-container">
           {listItems}
         </div>
@@ -64,8 +58,6 @@ function VideoList(props) {
 
 VideoList.propTypes = {
   selections: PropTypes.arrayOf(PropTypes.any).isRequired,
-  screenHeight: PropTypes.string.isRequired,
-  screenWidth: PropTypes.string.isRequired,
 };
 
 export default VideoList;
