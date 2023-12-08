@@ -1,7 +1,9 @@
-import React from 'react';
+/* eslint-disable react/jsx-no-bind */
+import React, { useState, useEffect } from 'react';
 import { graphql } from 'gatsby';
 import { useIdleTimer } from 'react-idle-timer/legacy';
-import VideoList from '@components/VideoList';
+import VideoPlayer from '@components/VideoPlayer';
+import Selection from '../../components/Selection';
 import LanguageSwitcher from '../../components/LanguageSwitcher';
 
 export const pageQuery = graphql`
@@ -64,7 +66,6 @@ export const pageQuery = graphql`
 
 function VideoSelector(all) {
   const { data, pageContext } = all;
-
   // If only one locale is passed, create array with all other locales
   // This is used to create a language switcher
   let otherLocales = [];
@@ -92,8 +93,9 @@ function VideoSelector(all) {
     return locales;
   }
 
-  // Loads default selector after inactivity timeout
+  // Loads default (multi-lingual) selector after inactivity timeout
   const onIdle = () => {
+    console.log('IDLE!');
     window.location = `${window.location.origin}/${defaultSelector.slug}`;
   };
 
@@ -119,10 +121,24 @@ function VideoSelector(all) {
     return selectionObject;
   });
 
+  const [currentSelection, setCurrentSelection] = useState(selections[0]);
+
+  function getSelection(selection) {
+    setCurrentSelection(selection);
+  }
+
+  useEffect(() => {
+    getSelection(currentSelection);
+  }, [currentSelection]);
+
+  const listItems = selections.map((i) => (
+    <Selection item={i} getSelection={getSelection} currentSelection={currentSelection} />
+  ));
+
   return (
     <div className={`video-selector ${defaultSelector.slug}`}>
       <div
-        className="graphic background"
+        className="graphic"
         style={{
           backgroundImage: `url(${defaultSelector.backgroundAsset
             ? defaultSelector.backgroundAsset.localFile.publicURL
@@ -136,16 +152,8 @@ function VideoSelector(all) {
           </h1>
         ))}
       </div>
-      <VideoList
-        selections={selections}
-        // screenHeight={defaultSelector.screenHeight.toString()}
-        // screenWidth={defaultSelector.screenWidth.toString()}
-        graphic={
-          defaultSelector.backgroundAsset
-            ? defaultSelector.backgroundAsset.localFile.publicURL
-            : null
-        }
-      />
+      <div className="list-container">{listItems}</div>
+      <VideoPlayer currentSelection={currentSelection} />
       {otherLocales.length > 0 && (
         <LanguageSwitcher otherLocales={otherLocales} slug={defaultSelector.slug} />
       )}

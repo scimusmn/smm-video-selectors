@@ -17,85 +17,66 @@ img {
   * Every video selector is wrapped with its own slug
   * as a classname so that it can be targeted and have different styles.
 */
-.example .list-button {
-  background-color: transparent;
-  border: none;
-  height: 200px;
-  margin: 20px;
-  outline: none;
-  width: 200px;
+
+.example.video-selector {
+  background-color: aqua;
+  width: 1920px;
+  height: 1080px;
 }
 
-.example button img {
-  height: 200px;
-  width: 200px;
-}
-
-.example .component-container {
-  background-color: gray;
-  color: white;
-  left: 0;
+.example .graphic {
+  /* display: none; */
+  height: 1080px;
+  opacity: 0.2;
   position: absolute;
   top: 0;
-}
-
-.example .list-container {
-  display: flex;
-  justify-content: center;
-  position: relative;
+  width: 1920px;
 }
 
 .example .title-container {
   align-items: center;
   display: flex;
   justify-content: space-around;
-  padding: 200px;
-  position: relative;
+  /* position: absolute;
+  top: 0; */
 }
 
-.example .title1 {
-  font-size: 50px;
+.example .title.es {
+  color: purple;
 }
 
-.example .title2 {
-  color: gold;
-  font-size: 50px;
+.example .title.en-US {
+  color: blue;
 }
 
-.example .video-name1 {
-  color: white;
-  font-size: 20px;
+.example .title.fr {
+  color: green;
 }
 
-.example .video-name2 {
-  color: gold;
-  font-size: 20px;
+.example .list-item {
+  border: 1px solid black;
+  max-height: 400px;
+  margin: 20px;
+  width: 200px;
+  /* make sure buttons are above background */
+  z-index: 500;
 }
 
-.example .center {
-  align-items: center;
+.example .hide-selection {
+  z-index: -1;
+}
+
+.example .list-item img {
+  height: 200px;
+  width: 200px;
+}
+
+.example .list-container {
   display: flex;
   justify-content: center;
 }
 
-.example .transport-container {
-  background-color: transparent;
-  bottom: 50px;
-  left: 50px;
-  position: absolute;
-}
-
-.example .captions {
-  bottom: 200px;
-  font-size: 35px;
-  font-weight: 900;
-  padding-left: 100px;
-  padding-right: 100px;
-  position: absolute;
-  text-align: center;
-}
-
-.language-switcher {
+.example .language-switcher {
   bottom: 42px;
   color: white;
   font-size: 20px;
@@ -105,82 +86,132 @@ img {
   position: absolute;
 }
 
-.language-switcher .language {
+.example .language-switcher .language {
   background-color: rgb(255 255 255 / 25%);
   border-radius: 5px;
   margin-right: 15px;
   padding: 7px;
 }
 
-.language-switcher .language a {
+.example .language-switcher .language a {
   color: white;
   text-decoration: none;
 }
 
-.captions-wrapper .captions1 {
-  bottom: 150px;
-  color: red;
-}
-
-.captions-wrapper .captions2 {
-  bottom: 100px;
-  color: green;
-}
-
-.captions-wrapper .captions3 {
-  bottom: 50px;
-  color: purple;
-}
-
-.captions-wrapper .captions4 {
-  bottom: 0;
+.example .captions {
+  background-color: pink;
+  top: 950px;
   color: blue;
+  position: absolute;
+  text-align: center;
+  width: 1920px;
 }
 
-.example .captions-wrapper {
+.example .captions.fr {
+  background-color: peachpuff;
+  top: 975px;
+  color: green;
+  position: absolute;
+}
+
+.example .captions.es {
+  background-color: orange;
+  top: 1000px;
+  color: purple;
+  position: absolute;
+}
+
+.example .selection-title {
   display: flex;
   justify-content: center;
 }
 
-.example .graphic {
+.example .selection-title.en-US {
+  color: blue;
+}
+
+.example .selection-title.fr {
+  color: green;
+}
+
+.example .selection-title.es {
+  color: purple;
+}
+
+.example .divider {
+  border: 1px solid blue;
+  width: 50%;
+}
+
+.example .divider.fr {
+  border: 1px solid green;
+}
+
+.example .divider.es {
+  border: 1px solid purple;
+}
+
+.example .hide-wrapper {
+  opacity: 0;
+}
+
+.example .wrapper {
+  background-color: black;
+}
+
+.example #player-container {
+  display: flex;
+  justify-content: center;
+  width: 1920px;
   height: 1080px;
-  opacity: 0.2;
   position: absolute;
   top: 0;
-  width: 1920px;
-}
-
-.example hr {
-  display: none;
-}
-
-.example .player {
-  width: 1920px;
+  left: 0;
+  overflow: hidden;
 }
 
 .example video {
   width: 1920px;
+  height: 1080px;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .example .progress {
   background: white;
-  bottom: 0;
   height: 20px;
-  position: absolute;
   width: 1920px;
+  position: absolute;
+  top: 1055px;
 }
 
-.example .progress-background {
-  background: #828282;
-  bottom: 0;
+.example .progress-fill {
+  background-color: gold;
   height: 20px;
-  position: absolute;
-  width: 1920px;
 }
 
-.example .icon {
+/* .example .progress-fill.es {
+  background-color: pink;
+  height: 20px;
+}
+
+.example .progress-fill.fr {
+  background-color: peachpuff;
+  height: 20px;
+} */
+
+/* .example .icon {
   background: url("back.svg") no-repeat;
   color: white;
   height: 100px;
   width: 100px;
+} */
+
+.example .transport-container {
+  background-color: green;
+  top: 1000px;
+  padding: 10px;
+  left: 20px;
+  position: absolute;
 }
