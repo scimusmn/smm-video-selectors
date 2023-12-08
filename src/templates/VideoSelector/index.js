@@ -96,11 +96,10 @@ function VideoSelector(all) {
 
   // Loads default (multi-lingual) selector after inactivity timeout
   const onIdle = () => {
-    console.log('IDLE!');
     window.location = `${window.location.origin}/${defaultSelector.slug}`;
   };
 
-  useIdleTimer({
+  const { pause, reset } = useIdleTimer({
     onIdle,
     timeout: defaultSelector.inactivityDelay * 1000,
     throttle: 500,
@@ -145,7 +144,12 @@ function VideoSelector(all) {
   }, [currentSelection]);
 
   const listItems = selections.map((i) => (
-    <Selection item={i} getSelection={getSelection} currentSelection={currentSelection} />
+    <Selection
+      key={i.titleDisplay}
+      item={i}
+      getSelection={getSelection}
+      currentSelection={currentSelection}
+    />
   ));
 
   return (
@@ -166,7 +170,7 @@ function VideoSelector(all) {
         ))}
       </div>
       <div className="list-container">{listItems}</div>
-      <VideoPlayer currentSelection={currentSelection} />
+      <VideoPlayer currentSelection={currentSelection} pause={pause} reset={reset} />
       {otherLocales.length > 0 && (
         <LanguageSwitcher otherLocales={otherLocales} slug={defaultSelector.slug} />
       )}

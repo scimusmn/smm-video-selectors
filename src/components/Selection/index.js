@@ -43,7 +43,7 @@ function Selection(props) {
 Selection.propTypes = {
   item: PropTypes.objectOf(PropTypes.any).isRequired,
   getSelection: PropTypes.func.isRequired,
-  currentSelection: PropTypes.func.isRequired,
+  currentSelection: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default Selection;

@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import useCaptions from '../../useCaptions';
 
 function VideoPlayer(props) {
-  const { currentSelection } = props;
+  const { currentSelection, pause, reset } = props;
   const videoRef = useRef(null);
   const [fillAmount, setFillAmount] = useState(0);
 
@@ -53,6 +53,9 @@ function VideoPlayer(props) {
           console.info('User has not interacted with document yet.', error);
         });
     }, 500);
+
+    // pause idle timer during video playback
+    pause();
   }
 
   function goBack() {
@@ -64,6 +67,9 @@ function VideoPlayer(props) {
     document.getElementById('player-wrapper').classList.add('hide-wrapper');
     const items = document.getElementsByClassName('list-item');
     Object.keys(items).map((i) => items[i].classList.remove('hide-selection'));
+
+    // resume idle timer
+    reset();
   }
 
   function onVideoEnd() {
@@ -97,7 +103,7 @@ function VideoPlayer(props) {
         </video>
       </div>
       {Object.keys(currentSelection.captionAssets).map((locale, index) => (
-        <div>
+        <div key={locale}>
           <div key={locale} className={`captions captions${index} ${locale}`}>
             {captions[index]}
           </div>
@@ -115,6 +121,8 @@ function VideoPlayer(props) {
 
 VideoPlayer.propTypes = {
   currentSelection: PropTypes.objectOf(PropTypes.any).isRequired,
+  pause: PropTypes.func.isRequired,
+  reset: PropTypes.func.isRequired,
 };
 
 export default VideoPlayer;
