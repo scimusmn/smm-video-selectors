@@ -59,6 +59,7 @@ function VideoPlayer(props) {
     console.log('Back to menu');
     videoRef.current.currentTime = 0;
     videoRef.current.pause();
+    videoRef.src = '';
     // Apply styles to show menu and hide list items
     document.getElementById('player-wrapper').classList.add('hide-wrapper');
     const items = document.getElementsByClassName('list-item');
@@ -103,7 +104,9 @@ function VideoPlayer(props) {
           <div className={`progress ${locale}`}>
             <div className={`progress-fill ${locale}`} style={{ width: `${fillAmount}%` }} />
           </div>
-          <div className="transport-container" onClick={() => goBack()}>Back to menu</div>
+          <div className="transport-container" onClick={() => goBack()}>
+            <div className="icon" />
+          </div>
         </div>
       ))}
     </div>

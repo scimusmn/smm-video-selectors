@@ -66,6 +66,7 @@ export const pageQuery = graphql`
 
 function VideoSelector(all) {
   const { data, pageContext } = all;
+
   // If only one locale is passed, create array with all other locales
   // This is used to create a language switcher
   let otherLocales = [];
@@ -121,7 +122,19 @@ function VideoSelector(all) {
     return selectionObject;
   });
 
-  const [currentSelection, setCurrentSelection] = useState(selections[0]);
+  // to use for initial state
+  const blankSelection = {
+    titleDisplay: selections[0].titleDisplay,
+    titleDisplays: getLocales('titleDisplay', 0),
+    captionAsset: '',
+    captionAssets: getLocales('captionAsset', 0),
+    thumbnail: selections[0].thumbnail,
+    thumbnails: getLocales('thumbnail', 0),
+    videoAsset: '',
+    videoAssets: getLocales('videoAsset', 0),
+  };
+
+  const [currentSelection, setCurrentSelection] = useState(blankSelection);
 
   function getSelection(selection) {
     setCurrentSelection(selection);

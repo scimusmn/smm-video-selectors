@@ -1,3 +1,6 @@
+/* stylelint-disable selector-class-pattern */
+/* stylelint-disable no-missing-end-of-source-newline */
+
 html,
 body {
   font-family: open-sans, sans-serif;
@@ -20,8 +23,8 @@ img {
 
 .example.video-selector {
   background-color: aqua;
-  width: 1920px;
   height: 1080px;
+  width: 1920px;
 }
 
 .example .graphic {
@@ -37,8 +40,6 @@ img {
   align-items: center;
   display: flex;
   justify-content: space-around;
-  /* position: absolute;
-  top: 0; */
 }
 
 .example .title.es {
@@ -55,9 +56,10 @@ img {
 
 .example .list-item {
   border: 1px solid black;
-  max-height: 400px;
   margin: 20px;
+  max-height: 400px;
   width: 200px;
+
   /* make sure buttons are above background */
   z-index: 500;
 }
@@ -100,25 +102,25 @@ img {
 
 .example .captions {
   background-color: pink;
-  top: 950px;
   color: blue;
   position: absolute;
   text-align: center;
+  top: 950px;
   width: 1920px;
 }
 
 .example .captions.fr {
   background-color: peachpuff;
-  top: 975px;
   color: green;
   position: absolute;
+  top: 975px;
 }
 
 .example .captions.es {
   background-color: orange;
-  top: 1000px;
   color: purple;
   position: absolute;
+  top: 1000px;
 }
 
 .example .selection-title {
@@ -161,29 +163,29 @@ img {
 
 .example #player-container {
   display: flex;
-  justify-content: center;
-  width: 1920px;
   height: 1080px;
-  position: absolute;
-  top: 0;
+  justify-content: center;
   left: 0;
   overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 1920px;
 }
 
 .example video {
-  width: 1920px;
   height: 1080px;
+  left: 0;
   position: absolute;
   top: 0;
-  left: 0;
+  width: 1920px;
 }
 
 .example .progress {
   background: white;
   height: 20px;
-  width: 1920px;
   position: absolute;
   top: 1055px;
+  width: 1920px;
 }
 
 .example .progress-fill {
@@ -201,17 +203,17 @@ img {
   height: 20px;
 } */
 
-/* .example .icon {
+.example .icon {
   background: url("back.svg") no-repeat;
   color: white;
-  height: 100px;
-  width: 100px;
-} */
+  height: 65px;
+  width: 65px;
+}
 
 .example .transport-container {
   background-color: green;
-  top: 1000px;
-  padding: 10px;
-  left: 20px;
+  border-radius: 50%;
+  left: 50px;
   position: absolute;
+  top: 800px;
 }
