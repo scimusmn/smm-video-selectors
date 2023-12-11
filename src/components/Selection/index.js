@@ -18,7 +18,8 @@ function Selection(props) {
     }
     // Apply styles to hide list and show video
     const player = document.getElementById('player-wrapper');
-    player.classList.remove('hide-wrapper');
+    player.classList.remove('hide-player-wrapper');
+    player.classList.add('show-player-wrapper');
     const items = document.getElementsByClassName('list-item');
     Object.keys(items).map((i) => items[i].classList.add('hide-selection'));
   }

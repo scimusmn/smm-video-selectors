@@ -153,8 +153,14 @@ img {
   border: 1px solid purple;
 }
 
-.example .hide-wrapper {
+.example .hide-player-wrapper {
   opacity: 0;
+  transition: opacity 1s;
+}
+
+.example .show-player-wrapper {
+  opacity: 1;
+  transition: opacity 1s;
 }
 
 .example .wrapper {
@@ -216,4 +222,12 @@ img {
   left: 50px;
   position: absolute;
   top: 800px;
+}
+
+.example .loading {
+  background-color: orange;
+  color: black;
+  padding: 50px;
+  position: absolute;
+  top: 0;
 }

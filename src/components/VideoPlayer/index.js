@@ -11,6 +11,7 @@ function VideoPlayer(props) {
   const { currentSelection, pause, reset } = props;
   const videoRef = useRef(null);
   const [fillAmount, setFillAmount] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     videoRef.current?.load();
@@ -32,6 +33,7 @@ function VideoPlayer(props) {
         track.mode = 'showing';
         track.mode = 'hidden';
       }
+      setIsLoading(false);
     });
 
     // progress bar animation
@@ -64,7 +66,9 @@ function VideoPlayer(props) {
     videoRef.current.pause();
     videoRef.src = '';
     // Apply styles to show menu and hide list items
-    document.getElementById('player-wrapper').classList.add('hide-wrapper');
+    const player = document.getElementById('player-wrapper');
+    player.classList.add('hide-player-wrapper');
+    player.classList.remove('show-player-wrapper');
     const items = document.getElementsByClassName('list-item');
     Object.keys(items).map((i) => items[i].classList.remove('hide-selection'));
 
@@ -77,13 +81,14 @@ function VideoPlayer(props) {
   }
 
   return (
-    <div id="player-wrapper" className="wrapper hide-wrapper">
+    <div id="player-wrapper" className="wrapper hide-player-wrapper">
       <div id="player-container">
         <video
           id="video"
           ref={videoRef}
           onLoadedData={() => onVideoLoad()}
           onEnded={() => onVideoEnd()}
+          onLoadStart={() => setIsLoading(true)}
         >
           <source src={currentSelection.videoAsset} />
           {Object.keys(currentSelection.captionAssets).map((locale) => {
@@ -102,6 +107,7 @@ function VideoPlayer(props) {
           })}
         </video>
       </div>
+      {isLoading && <div className="loading">Loading...</div>}
       {Object.keys(currentSelection.captionAssets).map((locale, index) => (
         <div key={locale}>
           <div key={locale} className={`captions captions${index} ${locale}`}>
