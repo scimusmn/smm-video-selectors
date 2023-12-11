@@ -21,6 +21,13 @@ function VideoPlayer(props) {
     console.log(fillAmount);
   }, [fillAmount]);
 
+  useEffect(() => {
+    // hack to hide loading indicator on mount before selection is made
+    if (!currentSelection.videoAsset) {
+      setTimeout(() => setIsLoading(false), 500);
+    }
+  }, []);
+
   const captions = Object.keys(currentSelection.captionAssets).map(
     (locale) => useCaptions(videoRef, locale, true),
   );

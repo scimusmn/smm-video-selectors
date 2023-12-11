@@ -231,3 +231,176 @@ img {
   position: absolute;
   top: 0;
 }
+
+/* These are styles for a "youtube" style selector display */
+
+.example-list.video-selector {
+  /* background-color: transparent;
+  height: 1080px;
+  width: 1920px; */
+}
+
+.example-list .graphic {
+  /* display: none; */
+}
+
+.example-list .title-container {
+  border: 1px solid purple;
+  display: flex;
+  justify-content: space-around;
+}
+
+.example-list .title.es {
+  color: purple;
+}
+
+.example-list .title.en-US {
+  color: blue;
+}
+
+.example-list .title.fr {
+  color: green;
+}
+
+.example-list .list-item {
+  border: 1px solid black;
+  height: 150px;
+
+  /* make sure buttons are above background */
+  z-index: 500;
+}
+
+.example-list .divider {
+  display: none;
+}
+
+.example-list .list-item img {
+  height: 150px;
+  padding-right: 5px;
+  width: 150px;
+}
+
+.example-list .list-container {
+  left: 1100px;
+  position: absolute;
+  top: 100px;
+  width: 300px;
+}
+
+.example-list .language-switcher {
+  bottom: 42px;
+  color: white;
+  font-size: 20px;
+  font-weight: 900;
+  left: 40px;
+  outline: none;
+  position: absolute;
+}
+
+.example-list .language-switcher .language {
+  background-color: rgb(255 255 255 / 25%);
+  border-radius: 5px;
+  margin-right: 15px;
+  padding: 7px;
+}
+
+.example-list .language-switcher .language a {
+  color: white;
+  text-decoration: none;
+}
+
+.example-list .captions {
+  background-color: pink;
+  color: blue;
+  left: 20px;
+  position: absolute;
+  text-align: center;
+  top: 625px;
+  width: 1270px;
+}
+
+.example-list .captions.fr {
+  background-color: peachpuff;
+  color: green;
+  position: absolute;
+  top: 645px;
+}
+
+.example-list .captions.es {
+  background-color: orange;
+  color: purple;
+  position: absolute;
+  top: 665px;
+}
+
+.example-list .selection-title {
+  left: 170px;
+  position: relative;
+  top: -160px;
+}
+
+.example-list .selection-title.en-US {
+  color: blue;
+}
+
+.example-list .selection-title.fr {
+  color: green;
+}
+
+.example-list .selection-title.es {
+  color: purple;
+}
+
+/* .example-list .hide-player-wrapper {}
+
+.example-list .show-player-wrapper {} */
+
+.example-list .wrapper {
+  background-color: black;
+}
+
+.example-list #player-container {
+  display: flex;
+  height: 500px;
+  justify-content: center;
+  left: 20px;
+  position: absolute;
+  top: 100px;
+}
+
+.example-list .progress {
+  background: white;
+  height: 20px;
+  left: 20px;
+  position: absolute;
+  top: 605px;
+  width: 1270px;
+}
+
+.example-list .progress-fill {
+  background-color: gold;
+  height: 15px;
+}
+
+/* .example-list .icon {
+  background: url("back.svg") no-repeat;
+  color: white;
+  height: 65px;
+  width: 65px;
+}
+
+.example-list .transport-container {
+  background-color: green;
+  border-radius: 50%;
+  left: 50px;
+  position: absolute;
+  top: 615px;
+} */
+
+.example-list .loading {
+  background-color: orange;
+  color: black;
+  padding: 50px;
+  position: absolute;
+  top: 0;
+}

@@ -24,8 +24,8 @@ function Selection(props) {
     Object.keys(items).map((i) => items[i].classList.add('hide-selection'));
   }
   return (
-    <div className="list-item">
-      <div onClick={() => click()}>
+    <div className="list-item" onClick={() => click()}>
+      <div className="image-container">
         <img src={item.thumbnail.localFile.publicURL} alt="thumbnail" />
       </div>
       {Object.keys(item.titleDisplays).map((locale, i) => {
