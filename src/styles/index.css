@@ -54,7 +54,7 @@ img {
   color: green;
 }
 
-.example .list-item {
+.example .selection-item {
   border: 1px solid black;
   margin: 20px;
   max-height: 400px;
@@ -68,12 +68,12 @@ img {
   z-index: -1;
 }
 
-.example .list-item img {
+.example .selection-item img {
   height: 200px;
   width: 200px;
 }
 
-.example .list-container {
+.example .selection-container {
   display: flex;
   justify-content: center;
 }
@@ -262,7 +262,7 @@ img {
   color: green;
 }
 
-.example-list .list-item {
+.example-list .selection-item {
   border: 1px solid black;
   height: 150px;
 
@@ -274,7 +274,7 @@ img {
   display: none;
 }
 
-.example-list .list-item img {
+.example-list .selection-item img {
   height: 150px;
   padding-right: 5px;
   width: 150px;

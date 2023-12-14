@@ -135,20 +135,31 @@ function VideoSelector(all) {
 
   const [currentSelection, setCurrentSelection] = useState(blankSelection);
 
-  function getSelection(selection) {
+  function setSelection(selection) {
     setCurrentSelection(selection);
+    // Replay video on click if current selection hasn't changed.
+    // (Only applicable when selections and video player are both visible)
+    if (selection === currentSelection && selection.videoAsset) {
+      document.getElementById('video').play();
+
+      // Apply styles to hide list and show video
+      const player = document.getElementById('player-wrapper');
+      player.classList.remove('hide-player-wrapper');
+      player.classList.add('show-player-wrapper');
+      const selectionItems = document.getElementsByClassName('selection-item');
+      Object.keys(selectionItems).forEach((i) => selectionItems[i].classList.add('hide-selection'));
+    }
   }
 
   useEffect(() => {
-    getSelection(currentSelection);
+    setSelection(currentSelection);
   }, [currentSelection]);
 
-  const listItems = selections.map((i) => (
+  const selectionItems = selections.map((i) => (
     <Selection
       key={i.titleDisplay}
       item={i}
-      getSelection={getSelection}
-      currentSelection={currentSelection}
+      setSelection={setSelection}
     />
   ));
 
@@ -169,7 +180,7 @@ function VideoSelector(all) {
           </h1>
         ))}
       </div>
-      <div className="list-container">{listItems}</div>
+      <div className="selection-container">{selectionItems}</div>
       <VideoPlayer currentSelection={currentSelection} pause={pause} reset={reset} />
       {otherLocales.length > 0 && (
         <LanguageSwitcher otherLocales={otherLocales} slug={defaultSelector.slug} />

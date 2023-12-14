@@ -52,17 +52,6 @@ function VideoPlayer(props) {
       if (rounded !== fillAmount) setFillAmount(rounded);
     });
 
-    // To avoid play error on load due to user interaction
-    const tryToPlay = setInterval(() => {
-      videoRef.current.play()
-        .then(() => {
-          clearInterval(tryToPlay);
-        })
-        .catch((error) => {
-          console.info('User has not interacted with document yet.', error);
-        });
-    }, 500);
-
     // pause idle timer during video playback
     pause();
   }
@@ -72,12 +61,13 @@ function VideoPlayer(props) {
     videoRef.current.currentTime = 0;
     videoRef.current.pause();
     videoRef.src = '';
+
     // Apply styles to show menu and hide list items
     const player = document.getElementById('player-wrapper');
     player.classList.add('hide-player-wrapper');
     player.classList.remove('show-player-wrapper');
-    const items = document.getElementsByClassName('list-item');
-    Object.keys(items).map((i) => items[i].classList.remove('hide-selection'));
+    const selections = document.getElementsByClassName('selection-item');
+    Object.keys(selections).forEach((i) => selections[i].classList.remove('hide-selection'));
 
     // resume idle timer
     reset();

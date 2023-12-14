@@ -7,24 +7,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function Selection(props) {
-  const { item, getSelection, currentSelection } = props;
+  const { item, setSelection } = props;
 
-  function click() {
-    getSelection(item);
-    // Replay video on click if current selection hasn't changed.
-    // (Only applicable in a "youtube" type view, when selections and video player are both visible)
-    if (item === currentSelection) {
-      document.getElementById('video').play();
-    }
-    // Apply styles to hide list and show video
-    const player = document.getElementById('player-wrapper');
-    player.classList.remove('hide-player-wrapper');
-    player.classList.add('show-player-wrapper');
-    const items = document.getElementsByClassName('list-item');
-    Object.keys(items).map((i) => items[i].classList.add('hide-selection'));
-  }
   return (
-    <div className="list-item" onClick={() => click()}>
+    <div className="selection-item" onClick={() => setSelection(item)}>
       <div className="image-container">
         <img src={item.thumbnail.localFile.publicURL} alt="thumbnail" />
       </div>
@@ -43,8 +29,7 @@ function Selection(props) {
 
 Selection.propTypes = {
   item: PropTypes.objectOf(PropTypes.any).isRequired,
-  getSelection: PropTypes.func.isRequired,
-  currentSelection: PropTypes.objectOf(PropTypes.any).isRequired,
+  setSelection: PropTypes.func.isRequired,
 };
 
 export default Selection;
