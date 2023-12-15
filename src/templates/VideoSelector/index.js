@@ -1,7 +1,9 @@
-import React from 'react';
+/* eslint-disable react/jsx-no-bind */
+import React, { useState, useEffect } from 'react';
 import { graphql } from 'gatsby';
 import { useIdleTimer } from 'react-idle-timer/legacy';
-import VideoList from '@components/VideoList';
+import VideoPlayer from '@components/VideoPlayer';
+import Selection from '../../components/Selection';
 import LanguageSwitcher from '../../components/LanguageSwitcher';
 
 export const pageQuery = graphql`
@@ -92,12 +94,12 @@ function VideoSelector(all) {
     return locales;
   }
 
-  // Loads default selector after inactivity timeout
+  // Loads default (multi-lingual) selector after inactivity timeout
   const onIdle = () => {
     window.location = `${window.location.origin}/${defaultSelector.slug}`;
   };
 
-  useIdleTimer({
+  const { pause, reset } = useIdleTimer({
     onIdle,
     timeout: defaultSelector.inactivityDelay * 1000,
     throttle: 500,
@@ -119,10 +121,52 @@ function VideoSelector(all) {
     return selectionObject;
   });
 
+  // to use for initial state
+  const blankSelection = {
+    titleDisplay: selections[0].titleDisplay,
+    titleDisplays: getLocales('titleDisplay', 0),
+    captionAsset: '',
+    captionAssets: getLocales('captionAsset', 0),
+    thumbnail: selections[0].thumbnail,
+    thumbnails: getLocales('thumbnail', 0),
+    videoAsset: '',
+    videoAssets: getLocales('videoAsset', 0),
+  };
+
+  const [currentSelection, setCurrentSelection] = useState(blankSelection);
+
+  function setSelection(selection) {
+    setCurrentSelection(selection);
+    // Replay video on click if current selection hasn't changed.
+    // (Only applicable when selections and video player are both visible)
+    if (selection === currentSelection && selection.videoAsset) {
+      document.getElementById('video').play();
+
+      // Apply styles to hide list and show video
+      const player = document.getElementById('player-wrapper');
+      player.classList.remove('hide-player-wrapper');
+      player.classList.add('show-player-wrapper');
+      const selectionItems = document.getElementsByClassName('selection-item');
+      Object.keys(selectionItems).forEach((i) => selectionItems[i].classList.add('hide-selection'));
+    }
+  }
+
+  useEffect(() => {
+    setSelection(currentSelection);
+  }, [currentSelection]);
+
+  const selectionItems = selections.map((i) => (
+    <Selection
+      key={i.titleDisplay}
+      item={i}
+      setSelection={setSelection}
+    />
+  ));
+
   return (
     <div className={`video-selector ${defaultSelector.slug}`}>
       <div
-        className="graphic background"
+        className="graphic"
         style={{
           backgroundImage: `url(${defaultSelector.backgroundAsset
             ? defaultSelector.backgroundAsset.localFile.publicURL
@@ -136,16 +180,8 @@ function VideoSelector(all) {
           </h1>
         ))}
       </div>
-      <VideoList
-        selections={selections}
-        // screenHeight={defaultSelector.screenHeight.toString()}
-        // screenWidth={defaultSelector.screenWidth.toString()}
-        graphic={
-          defaultSelector.backgroundAsset
-            ? defaultSelector.backgroundAsset.localFile.publicURL
-            : null
-        }
-      />
+      <div className="selection-container">{selectionItems}</div>
+      <VideoPlayer currentSelection={currentSelection} pause={pause} reset={reset} />
       {otherLocales.length > 0 && (
         <LanguageSwitcher otherLocales={otherLocales} slug={defaultSelector.slug} />
       )}
