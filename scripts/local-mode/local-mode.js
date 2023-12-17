@@ -6,8 +6,8 @@
   2. follow the prompts
   3. run `yarn clean && yarn develop` and ensure the project builds and runs
   4. you should see dummy content that matches the json in static/content/content.json
-  5. you can now edit the content in static/content/content.json
-  6. commit your changes and push to github
+  5. edit the content in static/content/content.json as needed
+  6. commit your changes and start pushing to repo
 */
 
 const chalk = require('chalk');
