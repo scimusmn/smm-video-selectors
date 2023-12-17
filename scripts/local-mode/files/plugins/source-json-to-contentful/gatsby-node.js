@@ -6,6 +6,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => 
   jsonData.locales.forEach((locale) => {
     const transformedData = {
       code: locale.code,
+      name: locale.name,
       default: locale.default,
     };
 
@@ -24,11 +25,6 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => 
 
   // Get default locale code
   const defaultLocale = jsonData.locales.find((locale) => locale.default).code;
-  console.log('defaultLocale--->', defaultLocale);
-
-  // TODO: Replicate the below process for each locale, not just en-US
-  // When available, take content using the locale key, otherwise use the default
-  // Use the locale code to create a node ID
 
   function getLocalized(fieldValue, localeCode) {
     // Return the value as-is if it's not a locale object
@@ -55,30 +51,28 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => 
       const transformedData = {
         slug: selector.slug,
         node_locale: locale.code,
-        titleDisplay: getLocalized(selector.title, locale.code),
-        screenWidth: selector.screenWidth,
-        screenHeight: selector.screenHeight,
-        backgroundGraphic: {
+        inactivityDelay: selector.inactivityTimeout,
+        titleDisplay: getLocalized(selector.titleDisplay, locale.code),
+        backgroundAsset: {
           localFile: {
             publicURL: selector.backgroundAsset,
           },
         },
         selections: selector.selections.map((selection) => ({
-          titleDisplay: getLocalized(selection.title, locale.code),
-          caption: {
-            title: 'caption-title-here', // What is this for?
+          titleDisplay: getLocalized(selection.titleDisplay, locale.code),
+          captionAsset: {
             localFile: {
-              publicURL: getLocalized(selection.caption, locale.code),
+              publicURL: getLocalized(selection.captionAsset, locale.code),
             },
           },
-          media: {
+          videoAsset: {
             localFile: {
-              publicURL: selection.media,
+              publicURL: selection.videoAsset,
             },
           },
-          selectionImage: {
+          thumbnail: {
             localFile: {
-              publicURL: selection.selectionImage,
+              publicURL: selection.thumbnail,
             },
           },
         })),

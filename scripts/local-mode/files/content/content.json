@@ -6,7 +6,7 @@
             "default": true
         },
         {
-            "code": "es-MX",
+            "code": "es",
             "name": "Spanish",
             "default": false
         }
@@ -14,73 +14,71 @@
     "videoSelectors": [
         {
             "slug": "bugs",
-            "title": {
+            "inactivityTimeout": 45,
+            "titleDisplay": {
                 "en-US": "My videos about bugs",
-                "es-MX": "Mis videos sobre insectos"
+                "es": "Mis videos sobre insectos"
             },
-            "screenWidth": 1920,
-            "screenHeight": 1080,
             "backgroundAsset": "/images/caterpillar.png",
             "selections": [
                 {
-                    "title": {
+                    "titleDisplay": {
                         "en-US": "Caterpillar",
-                        "es-MX": "Oruga"
+                        "es": "Oruga"
                     },
-                    "caption": {
+                    "captionAsset": {
                         "en-US": "/captions/example-captions-en-US.vtt",
-                        "es-MX": "/captions/example-captions-es-MX.vtt"
+                        "es": "/captions/example-captions-es-MX.vtt"
                     },
-                    "media": "/videos/video-1.mp4",
-                    "selectionImage": "/images/caterpillar.png"
+                    "videoAsset": "/videos/video-1.mp4",
+                    "thumbnail": "/images/caterpillar.png"
                 },
                 {
-                    "title": {
+                    "titleDisplay": {
                         "en-US": "Ladybug",
-                        "es-MX": "Mariquita"
+                        "es": "Mariquita"
                     },
-                    "caption": {
+                    "captionAsset": {
                         "en-US": "/captions/example-captions-en-US.vtt",
-                        "es-MX": "/captions/example-captions-es-MX.vtt"
+                        "es": "/captions/example-captions-es-MX.vtt"
                     },
-                    "media": "/videos/video-1.mp4",
-                    "selectionImage": "/images/ladybug.png"
+                    "videoAsset": "/videos/video-1.mp4",
+                    "thumbnail": "/images/ladybug.png"
                 }
             ]
         },
         {
             "slug": "bonsais",
-            "title": {
+            "inactivityTimeout": 60,
+            "titleDisplay": {
                 "en-US": "My videos about miniature trees",
-                "es-MX": "Mis videos sobre árboles en miniatura"
+                "es": "Mis videos sobre árboles en miniatura"
             },
-            "screenWidth": 800,
-            "screenHeight": 600,
             "backgroundAsset": "/images/green.png",
             "selections": [
                 {
-                    "title": {
+                    "titleDisplay": {
                         "en-US": "Red tree",
-                        "es-MX": "Árbol rojo"
+                        "es": "Árbol rojo"
                     },
-                    "caption": {
+                    "captionAsset": {
                         "en-US": "/captions/example-captions-en-US.vtt",
-                        "es-MX": "/captions/example-captions-es-MX.vtt"
+                        "es": "/captions/example-captions-es-MX.vtt"
                     },
-                    "media": "/videos/video-1.mp4",
-                    "selectionImage": "/images/red.png"
+                    "videoAsset": "/videos/video-1.mp4",
+                    "thumbnail": "/images/red.png"
                 },
                 {
-                    "title": {
+                    "titleDisplay": {
                         "en-US": "Green tree",
-                        "es-MX": "Árbol verde"
+                        "es": "Árbol verde"
                     },
-                    "caption": {
+                    "captionAsset": {
                         "en-US": "/captions/example-captions-en-US.vtt",
-                        "es-MX": "/captions/example-captions-es-MX.vtt"
+                        "es": "/captions/example-captions-es-MX.vtt"
                     },
-                    "media": "/videos/video-1.mp4",
-                    "selectionImage": "/images/green.png"
+                    "videoAsset": "/videos/video-1.mp4",
+                    "thumbnail": "/images/green.png"
                 }
             ]
         }

@@ -21,7 +21,6 @@ export const pageQuery = graphql`
     selections {
       titleDisplay,
       captionAsset {
-        title
         localFile {
           publicURL
         } 
