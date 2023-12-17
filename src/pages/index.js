@@ -4,32 +4,53 @@ import { graphql, useStaticQuery, Link } from 'gatsby';
 function IndexPage() {
   const data = useStaticQuery(graphql`
     query {
-      allContentfulVideoSelector {
-          nodes {
-            slug
-            titleDisplay
+      allContentfulLocale {
+        edges {
+          node {
+            code
+            default
+            name
           }
+        }
+      }
+      allContentfulVideoSelector {
+        nodes {
+          slug
+          titleDisplay
+        }
       }
     }
   `);
 
-  const { allContentfulVideoSelector } = data;
+  const { allContentfulLocale, allContentfulVideoSelector } = data;
+
+  // Collapse all locale results into unique video selectors
+  const uniqueVideoSelectors = allContentfulVideoSelector.nodes.reduce((acc, node) => {
+    if (!acc.some((item) => item.slug === node.slug)) {
+      acc.push(node);
+    }
+    return acc;
+  }, []);
 
   return (
-    <>
+    <div className="selector-selector">
       <h1>Video selectors</h1>
-      <ul>
-        {allContentfulVideoSelector.nodes.map((node) => (
-          <li key={node.slug}>
-            <strong>{node.slug}</strong>
-            {' - '}
+      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+        {uniqueVideoSelectors.map((node) => (
+          <div key={node.slug} className="card">
+            <h2>{node.titleDisplay}</h2>
             <Link to={node.slug}>
-              {node.titleDisplay}
+              <button type="button">Default</button>
             </Link>
-          </li>
+            {allContentfulLocale.edges.map((locale) => (
+              <Link key={locale.node.code} to={`/${locale.node.code}/${node.slug}`}>
+                <button type="button">{locale.node.name}</button>
+              </Link>
+            ))}
+          </div>
         ))}
-      </ul>
-    </>
+      </div>
+    </div>
   );
 }
 
