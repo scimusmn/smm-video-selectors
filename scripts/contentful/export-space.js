@@ -26,11 +26,11 @@ const requireEnvVars = (vars) => {
   }
 };
 
-requireEnvVars(['CONTENTFUL_SPACE_ID', 'CONTENTFUL_MANAGEMENT_TOKEN']);
+requireEnvVars(['CONTENTFUL_SPACE_ID', 'CONTENTFUL_MANAGEMENT_TOKEN', 'CONTENTFUL_ENVIRONMENT']);
 
 rl.question('Enter export directory: ', (exportDir) => {
   console.log(chalk.green('\nExporting contentful json to:', exportDir));
-  execSync(`contentful space export --space-id ${process.env.CONTENTFUL_SPACE_ID} --management-token ${process.env.CONTENTFUL_MANAGEMENT_TOKEN} --export-dir ${exportDir} --skip-roles true --skip-webhooks true`);
+  execSync(`contentful space export --space-id ${process.env.CONTENTFUL_SPACE_ID} --management-token ${process.env.CONTENTFUL_MANAGEMENT_TOKEN} --environment-id ${process.env.CONTENTFUL_ENVIRONMENT} --export-dir ${exportDir} --skip-roles true --skip-webhooks true`);
 
   console.log(chalk.green('Done!'));
   process.exit(0);
