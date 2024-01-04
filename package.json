@@ -66,6 +66,8 @@
     "import-space": "node scripts/contentful/import-space.js",
     "upload-assets": "node scripts/contentful/upload-assets.js",
     "create-example": "node scripts/contentful/create-entries.js",
+    "create-demo-project": "yarn upload-assets && sleep 5 && yarn create-example",
+    "bootstrap-demo": "yarn import-space && yarn create-demo-project",
     "install:arduino-base": "node scripts/install-arduino-base.js",
     "install:contentful": "node -r esm scripts/contentful/install-contentful.js && node -r esm scripts/contentful/autogenerate-pages.js",
     "lint": "npm-run-all lint:*",

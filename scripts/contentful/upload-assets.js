@@ -15,13 +15,13 @@ const client = contentful.createClient({
 const envName = process.env.CONTENTFUL_ENVIRONMENT;
 const spaceId = process.env.CONTENTFUL_SPACE_ID;
 
-const bgFileToUpload = 'src/example-assets/example-bg.jpg';
+const bgFileToUpload = 'scripts/contentful/example-assets/example-bg.jpg';
 const bgFileName = 'example-bg.jpg';
-const captionFileToUpload = 'src/example-assets/example-caption.vtt';
+const captionFileToUpload = 'scripts/contentful/example-assets/example-caption.vtt';
 const captionFileName = 'example-caption.vtt';
-const videoFileToUpload = 'src/example-assets/example-video.mp4';
+const videoFileToUpload = 'scripts/contentful/example-assets/example-video.mp4';
 const videoFileName = 'example-clip.mp4';
-const imgFileToUpload = 'src/example-assets/example-thumb.jpg';
+const imgFileToUpload = 'scripts/contentful/example-assets/example-thumb.jpg';
 const imgFileName = 'example-thumb.jpg';
 
 client.getSpace(spaceId)
