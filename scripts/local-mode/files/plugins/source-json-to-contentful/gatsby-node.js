@@ -44,12 +44,12 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => 
   }
 
   // Transform Video Selectors from JSON into Contentful structure
-  jsonData.videoSelectors.forEach((selector) => {
+  jsonData.videoSelectors.forEach((selector, index) => {
     // Create one node per locale (to match Contentful's locale structure)
     // These locale nodes are merged in front-end queries
     jsonData.locales.forEach((locale) => {
       const transformedData = {
-        slug: selector.slug,
+        slug: selector.slug || `video-selector-${index + 1}`, // If no slug is provided, use a default
         node_locale: locale.code,
         inactivityDelay: selector.inactivityTimeout,
         titleDisplay: getLocalized(selector.titleDisplay, locale.code),
