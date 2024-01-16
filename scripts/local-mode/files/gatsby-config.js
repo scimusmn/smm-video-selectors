@@ -22,23 +22,9 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-source-contentful',
+      resolve: 'source-json-to-contentful',
       options: {
-        spaceId: process.env.CONTENTFUL_SPACE_ID,
-        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-        forceFullSync: true,
-        useNameForId: false,
-        environment: process.env.CONTENTFUL_ENVIRONMENT,
-        host: process.env.CONTENTFUL_HOST,
-        downloadLocal: true,
-      },
-    },
-    {
-      resolve: 'smm-gatsby-source-contentful-locales',
-      options: {
-        spaceId: process.env.CONTENTFUL_SPACE_ID,
-        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-        environment: process.env.CONTENTFUL_ENVIRONMENT,
+        // Configure options for the plugin, if needed
       },
     },
     {

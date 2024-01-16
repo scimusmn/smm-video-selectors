@@ -5923,13 +5923,6 @@ gatsby-sharp@^1.13.0:
   dependencies:
     sharp "^0.32.6"
 
-gatsby-source-contentful-locales@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/gatsby-source-contentful-locales/-/gatsby-source-contentful-locales-1.0.3.tgz#8a6d7f2cf32d83a8218651f2b79a34d3d241db28"
-  integrity sha512-spsOMOcj6urfNaVQcJripivD9y0DQNp+UsFwEGw6TRITGyVQaNZjPkgkq4UGQzeIavc8LsNfolxwRcjhgYM6NA==
-  dependencies:
-    node-fetch "^2.6.0"
-
 gatsby-source-contentful@8.12.0:
   version "8.12.0"
   resolved "https://registry.yarnpkg.com/gatsby-source-contentful/-/gatsby-source-contentful-8.12.0.tgz#d304a1e199b0113a72067d92269502a6dc104ab1"
@@ -8110,7 +8103,7 @@ node-addon-api@^7.0.0:
   resolved "https://registry.yarnpkg.com/node-addon-api/-/node-addon-api-7.0.0.tgz#8136add2f510997b3b94814f4af1cce0b0e3962e"
   integrity sha512-vgbBJTS4m5/KkE16t5Ly0WW9hz46swAstv0hYYwMtbG7AznRhNyfLRe8HZAiWIpcHzoO7HxhLuBQj9rJ/Ho0ZA==
 
-node-fetch@^2.6.0, node-fetch@^2.6.11, node-fetch@^2.6.12:
+node-fetch@^2.6.11, node-fetch@^2.6.12:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.7.0.tgz#d0f0fa6e3e2dc1d27efcd8ad99d550bda94d187d"
   integrity sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==

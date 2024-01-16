@@ -15,6 +15,22 @@ img {
 
 /* *****EXAMPLE STYLES**** */
 
+.selector-selector .card {
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+  margin: 10px;
+  padding: 10px;
+  padding-bottom: 28px;
+  text-align: center;
+  transition: box-shadow 0.3s ease-in-out;
+  width: 200px;
+}
+
+.selector-selector .card:hover {
+  box-shadow: 0 4px 8px rgb(0 0 0 / 20%);
+}
+
 /* These `example` classnames should be replaced with
   * the slug of the video selector you would like to style.
   * Every video selector is wrapped with its own slug
@@ -28,7 +44,6 @@ img {
 }
 
 .example .graphic {
-  /* display: none; */
   height: 1080px;
   opacity: 0.2;
   position: absolute;
@@ -199,16 +214,6 @@ img {
   height: 20px;
 }
 
-/* .example .progress-fill.es {
-  background-color: pink;
-  height: 20px;
-}
-
-.example .progress-fill.fr {
-  background-color: peachpuff;
-  height: 20px;
-} */
-
 .example .icon {
   background: url("back.svg") no-repeat;
   color: white;
@@ -235,13 +240,11 @@ img {
 /* These are styles for a "youtube" style selector display */
 
 .example-list.video-selector {
-  /* background-color: transparent;
-  height: 1080px;
-  width: 1920px; */
+  /* to be filled */
 }
 
 .example-list .graphic {
-  /* display: none; */
+  /* to be filled */
 }
 
 .example-list .title-container {
@@ -351,10 +354,6 @@ img {
   color: purple;
 }
 
-/* .example-list .hide-player-wrapper {}
-
-.example-list .show-player-wrapper {} */
-
 .example-list .wrapper {
   background-color: black;
 }
@@ -381,21 +380,6 @@ img {
   background-color: gold;
   height: 15px;
 }
-
-/* .example-list .icon {
-  background: url("back.svg") no-repeat;
-  color: white;
-  height: 65px;
-  width: 65px;
-}
-
-.example-list .transport-container {
-  background-color: green;
-  border-radius: 50%;
-  left: 50px;
-  position: absolute;
-  top: 615px;
-} */
 
 .example-list .loading {
   background-color: orange;
