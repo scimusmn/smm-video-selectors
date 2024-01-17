@@ -18,10 +18,6 @@ function VideoPlayer(props) {
   }, [currentSelection]);
 
   useEffect(() => {
-    console.log(fillAmount);
-  }, [fillAmount]);
-
-  useEffect(() => {
     // hack to hide loading indicator on mount before selection is made
     if (!currentSelection.videoAsset) {
       setTimeout(() => setIsLoading(false), 500);
@@ -57,7 +53,6 @@ function VideoPlayer(props) {
   }
 
   function goBack() {
-    console.log('Back to menu');
     videoRef.current.currentTime = 0;
     videoRef.current.pause();
     videoRef.src = '';
