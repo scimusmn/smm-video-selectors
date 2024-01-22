@@ -43,6 +43,9 @@ rl.question(
       console.log(chalk.green('Deleting src/pages/contentful-example.js...'));
       execSync('rm -f ./src/pages/contentful-example.js');
 
+      console.log(chalk.green('Removing Contentful dependencies from package.json...'));
+      execSync('yarn remove gatsby-source-contentful gatsby-source-contentful-locales');
+
       execSync('yarn clean');
 
       process.exit(0);
