@@ -35,7 +35,7 @@ rl.question(
       execSync('cp -f -r ./scripts/local-mode/files/plugins ./');
 
       console.log(chalk.green('Copying content folder...'));
-      execSync('cp -f -r ./scripts/local-mode/files/content/* ./static');
+      execSync('mkdir -p ./static && cp -f -r ./scripts/local-mode/files/content/* ./static');
 
       console.log(chalk.green('Copying gatsby-config.js...'));
       execSync('cp -f ./scripts/local-mode/files/gatsby-config.js ./');
