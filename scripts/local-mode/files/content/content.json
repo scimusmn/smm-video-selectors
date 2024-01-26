@@ -16,8 +16,8 @@
             "slug": "bugs",
             "inactivityTimeout": 45,
             "titleDisplay": {
-                "en-US": "My videos about bugs",
-                "es": "Mis videos sobre insectos"
+                "en-US": "Bugs",
+                "es": "Insectos"
             },
             "backgroundAsset": "/images/caterpillar.png",
             "selections": [
@@ -51,8 +51,8 @@
             "slug": "bonsais",
             "inactivityTimeout": 60,
             "titleDisplay": {
-                "en-US": "My videos about miniature trees",
-                "es": "Mis videos sobre árboles en miniatura"
+                "en-US": "Trees",
+                "es": "Árboles"
             },
             "backgroundAsset": "/images/green.png",
             "selections": [

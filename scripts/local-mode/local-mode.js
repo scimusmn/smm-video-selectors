@@ -35,13 +35,19 @@ rl.question(
       execSync('cp -f -r ./scripts/local-mode/files/plugins ./');
 
       console.log(chalk.green('Copying content folder...'));
-      execSync('cp -f -r ./scripts/local-mode/files/content/* ./static');
+      execSync('mkdir -p ./static && cp -f -r ./scripts/local-mode/files/content/* ./static');
 
       console.log(chalk.green('Copying gatsby-config.js...'));
       execSync('cp -f ./scripts/local-mode/files/gatsby-config.js ./');
 
       console.log(chalk.green('Deleting src/pages/contentful-example.js...'));
       execSync('rm -f ./src/pages/contentful-example.js');
+
+      console.log(chalk.green('Deleting ENV example files...'));
+      execSync('rm -rf ./env*');
+
+      console.log(chalk.green('Removing Contentful dependencies from package.json...'));
+      execSync('yarn remove gatsby-source-contentful');
 
       execSync('yarn clean');
 
