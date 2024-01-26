@@ -17,6 +17,7 @@ module.exports = {
     ecmaVersion: 2020,
   },
   rules: {
+    'linebreak-style': 'off',
     'import/no-extraneous-dependencies': 'off',
     // The SMM team doesn't write React code in .jsx files exclusively, as is suggested in the
     // Airbnb guide, so override this rule to allow .js files.
