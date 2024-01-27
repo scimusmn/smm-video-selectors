@@ -11,7 +11,7 @@
 */
 
 const chalk = require('chalk');
-const { execSync } = require('child_process');
+const shell = require('shelljs');
 const readline = require('readline');
 
 const rl = readline.createInterface({
@@ -32,24 +32,25 @@ rl.question(
       console.log(chalk.green('Reconfiguring smm-video-selector for local content mode...'));
 
       console.log(chalk.green('Copying plugins folder...'));
-      execSync('cp -f -r ./scripts/local-mode/files/plugins ./');
+      shell.cp('-R', './scripts/local-mode/files/plugins', './');
 
       console.log(chalk.green('Copying content folder...'));
-      execSync('mkdir -p ./static && cp -f -r ./scripts/local-mode/files/content/* ./static');
+      shell.mkdir('-p', './static');
+      shell.cp('-R', './scripts/local-mode/files/content/*', './static');
 
       console.log(chalk.green('Copying gatsby-config.js...'));
-      execSync('cp -f ./scripts/local-mode/files/gatsby-config.js ./');
+      shell.cp('-f', './scripts/local-mode/files/gatsby-config.js', './');
 
       console.log(chalk.green('Deleting src/pages/contentful-example.js...'));
-      execSync('rm -f ./src/pages/contentful-example.js');
+      shell.rm('-f', './src/pages/contentful-example.js');
 
       console.log(chalk.green('Deleting ENV example files...'));
-      execSync('rm -rf ./env*');
+      shell.rm('-rf', './env*');
 
       console.log(chalk.green('Removing Contentful dependencies from package.json...'));
-      execSync('yarn remove gatsby-source-contentful');
+      shell.exec('yarn remove gatsby-source-contentful');
 
-      execSync('yarn clean');
+      shell.exec('yarn clean');
 
       process.exit(0);
     } else {
