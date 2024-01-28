@@ -9,18 +9,24 @@ const shell = require('shelljs');
 
 console.log(chalk.green('Checking for content files in expected kiosk location...'));
 
-// First, safety check to make sure content folder exists and main.json exists
+// First, safety checks to make sure content folder exists and main.json exists
 // If they don't exist, we'll assume this is being run by mistake and stop.
 
 // Check for existence of content folder
 if (!shell.test('-d', '../content')) {
-  console.log(chalk.red('Content folder not found. Exiting...'));
+  console.log(chalk.red('Content folder not found.\nThis script expects a folder named ')
+  + chalk.white('"content"')
+  + chalk.red(' to be in the parent directory of the application.\nYou may need to copy the existing ')
+  + chalk.white('"./static"')
+  + chalk.red(' folder up two levels and rename it ')
+  + chalk.white('"content"')
+  + chalk.red('.\nExiting...'));
   process.exit(1);
 }
 
 // Check for existence of main.json file inside content folder
 if (!shell.test('-f', '../content/main.json')) {
-  console.log(chalk.red('main.json not found. Exiting...'));
+  console.log(chalk.white('main.json') + chalk.red(' not found in ') + chalk.white('content') + chalk.red(' folder. Exiting...'));
   process.exit(1);
 }
 
