@@ -30,17 +30,27 @@ if (!shell.test('-f', '../content/main.json')) {
   process.exit(1);
 }
 
-// If node process is running, kill it depending on OS
+// If any *other* node processes are running, kill them
+// Get the current process ID
+const currentProcessId = process.pid;
+
 if (process.platform === 'win32') {
-  shell.exec('taskkill /F /IM node.exe');
+  // Windows command to list and kill node processes except the current one
+  shell.exec('tasklist | findstr node.exe', (code, stdout) => {
+    stdout.split('\n').forEach((line) => {
+      const pid = line.trim().split(/\s+/)[1];
+      if (pid && pid !== currentProcessId.toString()) {
+        console.log(chalk.yellow(`Kill Win process: ${currentProcessId}`));
+        shell.exec(`taskkill /F /PID ${pid}`);
+      }
+    });
+  });
 } else {
-  shell.exec('killall node');
+  shell.exec('pkill node');
 }
 
-// Looks like the external content folder exists, so we'll continue.
-console.log(chalk.green('Copying content folder...'));
+console.log(chalk.green('Rebuilding with latest content files...'));
 shell.cp('-u', '../content/*', './static');
-
 shell.exec('yarn build && yarn serve');
 
 process.exit(0);
